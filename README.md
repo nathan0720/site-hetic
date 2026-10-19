@@ -27,4 +27,4 @@ Le fichier `.nojekyll` permet de publier directement les fichiers statiques.
 - `style.css` : mise en page et thèmes.
 - `script.js` : changement de thème et démonstration interactive.
 
-Les marques et logos appartiennent à leurs propriétaires respectifs. Les icônes des réseaux sociaux sont au format SVG et proviennent de Simple Icons ; le logo HETIC provient du site de l’école.
+Les marques et logos appartiennent à leurs propriétaires respectifs. Les icônes des réseaux sociaux sont au format SVG. Twitch et Discord proviennent de Simple Icons ; YouTube et TikTok de la collection SVG Logos (gilbarbara/logos). Les pictogrammes Instagram et Snapchat de Simple Icons sont présentés sur leurs fonds de couleur ; le logo HETIC provient du site de l’école.

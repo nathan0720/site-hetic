@@ -600,3 +600,8 @@ pre {
 /* Les logos SVG gardent des proportions régulières dans leur fond blanc. */
 .icone img { width: 56px; height: 56px; }
 .instagram img { width: 52px; height: 52px; }
+
+/* Versions couleur : caméra blanche Instagram et fantôme Snapchat détouré. */
+.youtube img { width: 62px; height: 48px; }
+.instagram .icone { background: transparent; }
+.instagram img, .snapchat img { width: 76px; height: 76px; }
