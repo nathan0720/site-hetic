@@ -821,3 +821,5 @@ body.theme-clair .objectif-revoir { color: #954333; }
 .infos-ia-locale summary{cursor:pointer}.infos-ia-locale p{margin:6px 0}.option-wikipedia{display:flex;align-items:center;gap:6px}.option-wikipedia input{width:auto}
 .sources-ia-locale{display:flex;gap:8px;flex-wrap:wrap;font-size:.75rem;margin-top:8px}
 .commandes-ia-locale [hidden]{display:none}
+
+.commandes-ia-locale select{max-width:100%;flex-basis:100%;min-width:0;background:var(--fond);color:var(--texte);border:1px solid var(--bordure);border-radius:8px;padding:7px;font:inherit;font-size:.75rem;}

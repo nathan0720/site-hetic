@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <!-- La page utilise la largeur réelle de l'écran sur téléphone. -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Le premier projet HTML, CSS et JavaScript de Nathan and Simon : nos réseaux préférés.">
+    <title>Page 1 — Nathan &amp; Simon</title>
+    <link rel="stylesheet" href="page1.css?v=base-2">
+    <!-- defer attend que le HTML soit lu avant de lancer le JavaScript. -->
+    
+
+
+
+
+
+<script src="page1.js?v=base-2" defer></script>
+</head>
+<body>
+    <header class="entete"><div class="signature"><img class="logo-hetic" src="hetic-logo.svg" alt="HETIC" width="52" height="70"></div><div class="actions-entete"><nav class="choix-langue" aria-label="Site language"><a href="page1.html" lang="fr">FR</a><a href="page1-en.html" lang="en" aria-current="page">EN</a></nav><button class="bouton-theme" type="button" aria-pressed="false" hidden>☀ Light theme</button></div></header>
+
+    <main id="accueil">
+        <section class="presentation" aria-labelledby="titre">
+            <p class="etiquette">Our first web project</p>
+            <h1 id="titre">Two curious minds.<br>Our first <span>website.</span></h1>
+            <p class="introduction">Hi, we’re <strong>Nathan and Simon</strong> 👋<br>We’re discovering HTML, CSS and JavaScript.<br>Welcome to our little corner of the web!</p>
+            
+            <div class="langages" aria-label="The project languages"><span>HTML</span><span>CSS</span><span>JavaScript</span></div>
+            
+        </section>
+
+        <section class="section-reseaux" aria-labelledby="titre-reseaux">
+            <div class="titre-section">
+                <h2 id="titre-reseaux">Our favourite social platforms</h2>
+                <p>Discover ↗</p>
+            </div>
+            <!-- Chaque carte est un lien : elle fonctionne aussi sans JavaScript. -->
+            <div class="reseaux">
+                <a class="carte youtube" href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="YouTube (new tab)">
+                    <span class="icone"><img src="youtube.svg?v=logos-couleur-1" alt="" width="80" height="80"></span>
+                    <h3>YouTube</h3><p>One video, a thousand discoveries.</p><span class="ouvrir">Explore <span aria-hidden="true">↗</span></span>
+                </a>
+                <a class="carte twitch" href="https://www.twitch.tv/" target="_blank" rel="noopener noreferrer" aria-label="Twitch (new tab)">
+                    <span class="icone"><img src="twitch.svg" alt="" width="80" height="80"></span>
+                    <h3>Twitch</h3><p>Where we meet live.</p><span class="ouvrir">Explore <span aria-hidden="true">↗</span></span>
+                </a>
+                <a class="carte instagram" href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram (new tab)">
+                    <span class="icone"><img src="instagram.svg?v=logos-couleur-1" alt="" width="80" height="80"></span>
+                    <h3>Instagram</h3><p>A dose of inspiration.</p><span class="ouvrir">Explore <span aria-hidden="true">↗</span></span>
+                </a>
+                <a class="carte tiktok" href="https://www.tiktok.com/" target="_blank" rel="noopener noreferrer" aria-label="TikTok (new tab)">
+                    <span class="icone"><img src="tiktok.svg?v=logos-couleur-1" alt="" width="80" height="80"></span>
+                    <h3>TikTok</h3><p>Big ideas in short videos.</p><span class="ouvrir">Explore <span aria-hidden="true">↗</span></span>
+                </a>
+                
+                
+            </div>
+            <p class="note">Links open each platform in a new tab.</p>
+        </section>
+    </main>
+
+    <footer><p>Designed and coded by <strong>Nathan &amp; Simon</strong></p><p>Small steps, big ideas.</p></footer>
+</body>
+</html>

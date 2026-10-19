@@ -1,15 +1,35 @@
-# IA gratuite dans le navigateur
+# Assistant local gratuit — GitHub Pages
 
-Le site GitHub Pages utilise `coach-local.js` et un Web Worker (`coach-local-worker.js`). Le visiteur clique sur « Activer l’IA gratuite » avant tout téléchargement du modèle.
+Le navigateur exécute les modèles sur l’appareil du visiteur. Aucun compte, serveur d’inférence, clé API ou service facturé à la requête n’est nécessaire. Les bibliothèques et modèles sont téléchargés depuis des CDN, Hugging Face et les dépôts MLC officiels, seulement après activation explicite. Le cache dépend du navigateur.
 
-Le moteur Transformers.js 3.8.1 charge Qwen3-0.6B-ONNX en ONNX q8 depuis Hugging Face (environ 700 Mo moteur compris). Le calcul utilise WebAssembly, sur un seul thread, sans serveur, clé API, compte ou facturation à la requête. Une connexion initiale est nécessaire ; le cache dépend du navigateur. La vitesse et la compatibilité dépendent de la mémoire disponible et du navigateur. Ce petit modèle peut produire des erreurs ; ses réponses ne sont pas comparables à celles de ChatGPT.
+## Quatre modèles
 
-Les messages et fichiers texte/code sont traités sur l’appareil. Les images et PDF ne sont pas analysés par ce modèle texte. Les pièces jointes et l’historique sont tronqués pour limiter la mémoire. Le bouton Arrêter termine le moteur. Le mode guidé reste accessible quand l’IA est désactivée ou indisponible.
+| Mode | Modèle | Moteur | Conditions |
+| --- | --- | --- | --- |
+| Basique | Qwen3-0.6B, q8 | Transformers.js 3.8.1 / WebAssembly | Environ 700 Mo moteur inclus, navigateur récent et mémoire disponible |
+| Plus, expérimental | Qwen3-1.7B, q8 | Transformers.js / WebAssembly | Environ 1,8 Go de téléchargement, plusieurs Go de RAM, ordinateur conseillé |
+| Pro, expérimental | Qwen3-4B, q4f16_1 | WebLLM 0.2.85 / WebGPU | Plusieurs Go à télécharger, shader-f16, environ 4 Go de mémoire graphique libre |
+| Max, expérimental | Qwen3-8B, q4f16_1 | WebLLM / WebGPU | Plusieurs Go à télécharger, shader-f16, environ 6 Go de mémoire graphique libre |
 
-L’option Wikipédia, désactivée par défaut, transmet uniquement la question à l’API publique de Wikipédia. Les extraits et liens des articles sont affichés et fournis au modèle. Ce n’est pas une recherche générale sur Internet.
+Les modes correspondent à quatre modèles distincts, pas seulement à quatre consignes. Max est le plus gros modèle proposé ici, pas une limite absolue de GitHub Pages. La compatibilité et la mémoire de l’appareil limitent ce qui peut tourner. Aucun modèle n’est garanti sur tous les navigateurs ou téléphones. Aucun n’est présenté comme équivalent à ChatGPT.
 
-Les anciens fichiers serveur et `coach-ia.js` restent des exemples facultatifs, mais ne sont pas chargés par les pages. `coach-config.js` ne contient aucune clé ni adresse serveur. Ne jamais mettre une clé API dans un site public.
+Le bouton de vérification WebGPU importe le moteur, vérifie les deux modèles dans son registre et teste la présence d’un adaptateur avec shader-f16, sans télécharger les poids. Il ne peut pas garantir la quantité de mémoire libre. Arrêter ou changer de modèle termine le Worker. Le mode guidé demeure accessible quand l’IA est désactivée.
+
+## Pertinence et données
+
+Les nouvelles questions indépendantes ne reprennent pas les réponses précédentes. Les demandes de suite explicites peuvent conserver le dernier échange. Le contexte du site et les références HTML/CSS/JS ne sont joints que si la question les concerne. Les documents sont traités comme des données et non des consignes. Les pièces jointes sont limitées et tronquées pour limiter la mémoire. Ce sont des fichiers texte/code ; les images et PDF ne sont pas analysés par ces modèles texte.
+
+L’option Wikipédia est désactivée par défaut. Si activée, seule la question est transmise à l’API publique Wikipédia ; les extraits et liens des articles sont fournis au modèle. Ce n’est pas une recherche générale sur Internet.
+
+## Vérification et limites
+
+Basique a généré une vraie réponse dans Safari sur le site public et la correction de contexte a été testée localement avec une question générale (capitale du Japon). Le moteur WebLLM, les identifiants Pro/Max et la disponibilité WebGPU ont été vérifiés via le navigateur, sans charger leurs poids. Le chargement de Plus n’a pas été mené à terme ; sa génération, comme celle de Pro/Max, reste non validée sur cet appareil. Ces trois modes restent expérimentaux. Toute réponse peut contenir des erreurs.
+
+Les anciens fichiers serveur et coach-ia.js ne sont pas chargés par les pages. coach-config.js ne contient aucune clé ni adresse serveur. Ne jamais placer de clé API dans un site public.
 
 Sources :
 - https://huggingface.co/docs/transformers.js/v3.8.1/en/installation
 - https://huggingface.co/onnx-community/Qwen3-0.6B-ONNX
+- https://huggingface.co/onnx-community/Qwen3-1.7B-ONNX
+- https://webllm.mlc.ai/docs/user/basic_usage.html
+- https://github.com/mlc-ai/web-llm/blob/v0.2.85/src/config.ts

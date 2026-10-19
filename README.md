@@ -22,7 +22,7 @@ Site réalisé en HTML, CSS et JavaScript : présentation, liens vers nos résea
 
 Utiliser GitHub Pages ou un serveur HTTP local pour permettre le chargement du Web Worker IA. Tous les styles, scripts et logos sont inclus dans le dépôt.
 
-Par défaut, le coach utilise des réponses guidées liées aux cours et exercices. Le bouton « Activer l’IA gratuite » télécharge le petit modèle (environ 700 Mo) puis lance le calcul sur l’appareil. Le microphone ne démarre que sur un clic ; la dictée dépend du navigateur et peut utiliser son service vocal.
+Par défaut, le coach utilise des réponses guidées liées aux cours et exercices. Le menu propose quatre modèles : Basique 0,6B, Plus 1,7B, Pro 4B et Max 8B. Le téléchargement ne commence qu’après activation explicite. Les trois modes lourds sont expérimentaux ; Pro et Max nécessitent WebGPU et plusieurs Go de mémoire graphique. Le microphone ne démarre que sur un clic ; la dictée dépend du navigateur et peut utiliser son service vocal.
 
 ## Publication sur GitHub Pages
 
@@ -42,3 +42,7 @@ Le fichier `.nojekyll` permet de publier directement les fichiers statiques.
 - `script.js` : changement de thème et démonstration interactive.
 
 Les marques et logos appartiennent à leurs propriétaires respectifs. Les icônes des réseaux sociaux sont au format SVG. Twitch et Discord proviennent de Simple Icons ; YouTube et TikTok de la collection SVG Logos (gilbarbara/logos). Les pictogrammes Instagram et Snapchat de Simple Icons sont présentés sur leurs fonds de couleur ; le logo HETIC provient du site de l’école.
+
+## Page de départ indépendante
+
+`page1.html` et `page1.css` : version simple Nathan & Simon avec quatre réseaux sociaux, avec le logo et les couleurs HETIC, le mode clair/sombre et une version anglaise page1-en.html ; sans cours, labo, assistant ou lien vers les autres pages du site. Accessible directement par son URL.
