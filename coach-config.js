@@ -1,2 +1,2 @@
-/* URL publique du serveur IA, jamais une clé API. Vide = mode guidé. */
+// Version GitHub Pages : inférence locale sans API payante.
 window.HETIC_COACH_API = '';

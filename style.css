@@ -813,3 +813,11 @@ body.theme-clair .objectif-revoir { color: #954333; }
 .statut-fichiers { font-size: 10px; line-height: 1.4; margin: 6px 0; color: var(--texte-discret); }
 .fichiers-reponse { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
 .fichiers-reponse button { font-size: 11px; padding: 6px 9px; }
+
+/* IA dans le navigateur : commandes compactes et accessibles. */
+.commandes-ia-locale{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:8px 16px;flex-shrink:0}
+.statut-ia-locale{font-size:.72rem;opacity:.8;flex-basis:100%;overflow-wrap:anywhere}
+.infos-ia-locale{padding:0 16px 8px;font-size:.75rem;flex-shrink:0;max-height:130px;overflow:auto}
+.infos-ia-locale summary{cursor:pointer}.infos-ia-locale p{margin:6px 0}.option-wikipedia{display:flex;align-items:center;gap:6px}.option-wikipedia input{width:auto}
+.sources-ia-locale{display:flex;gap:8px;flex-wrap:wrap;font-size:.75rem;margin-top:8px}
+.commandes-ia-locale [hidden]{display:none}

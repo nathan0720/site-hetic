@@ -10,19 +10,19 @@ Site réalisé en HTML, CSS et JavaScript : présentation, liens vers nos résea
 - Palette HETIC, effet de verre et thèmes clair/sombre.
 - Labo : blocs à assembler pour débuter, quiz, six mini-exercices, éditeur HTML/CSS/JS et aperçu en direct.
 - Accompagnateur flottant sur toutes les pages : fenêtre déplaçable, discussion conservée pendant la navigation, dictée et lecture vocale facultatives.
-- Connexion IA avec recherche web préparée : voir README-IA.md ; elle nécessite un serveur et une clé API côté serveur.
+- Vraie IA locale gratuite, activable dans le navigateur, sans serveur ni clé API ; consultation facultative de Wikipédia. Voir README-IA.md.
 - Sauvegarde des essais dans le navigateur et téléchargement des projets en ZIP ou par fichier.
 - Chat minimaliste : Entrée pour envoyer, Maj + Entrée pour sauter une ligne.
-- Pièces jointes : code, texte, PDF et images (3 fichiers, 2 Mo chacun, 4 Mo au total).
+- Pièces jointes pour l’IA locale : code et texte (3 fichiers, 2 Mo chacun, 4 Mo au total).
 - Téléchargements des fichiers de code/texte contenus dans les réponses, individuellement ou en ZIP.
 - Guide GitHub Pages décrivant notre publication dans Safari.
 - Maquette Figma : https://www.figma.com/design/VvBDxtK290dcxWSIiXkkG3
 
 ## Ouvrir le site
 
-Ouvrir `index.html` dans un navigateur. Tous les styles, scripts et logos sont inclus dans le dépôt.
+Utiliser GitHub Pages ou un serveur HTTP local pour permettre le chargement du Web Worker IA. Tous les styles, scripts et logos sont inclus dans le dépôt.
 
-Par défaut, le coach utilise des réponses guidées liées aux cours et exercices. Le mode IA reste inactif tant que coach-config.js ne désigne pas un serveur configuré. Le microphone ne démarre que sur un clic ; la dictée dépend du navigateur et peut utiliser son service vocal.
+Par défaut, le coach utilise des réponses guidées liées aux cours et exercices. Le bouton « Activer l’IA gratuite » télécharge le petit modèle (environ 700 Mo) puis lance le calcul sur l’appareil. Le microphone ne démarre que sur un clic ; la dictée dépend du navigateur et peut utiliser son service vocal.
 
 ## Publication sur GitHub Pages
 
