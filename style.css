@@ -1,15 +1,16 @@
 /* Les variables regroupent les couleurs pour les réutiliser facilement. */
 
-/* 1. COULEURS ET THÈMES */
+/* 1. COULEURS ET THÈMES
+   Palette du site HETIC : menthe #2EE7C4, vert #00634B, vert nuit #001810. */
 :root
  {
     color-scheme: dark;
-    --fond: #101827;
-    --fond-secondaire: #29215b;
-    --texte: #f5f5ff;
-    --texte-discret: #b7bed4;
-    --accent: #80e8ee;
-    --bordure: #ffffff24;
+    --fond: #001810;
+    --fond-secondaire: #00634B;
+    --texte: #ffffff;
+    --texte-discret: #c4ddd5;
+    --accent: #2EE7C4;
+    --bordure: #2ee7c433;
     --surface: #ffffff08;
 }
 
@@ -17,12 +18,12 @@
 body.theme-clair
  {
     color-scheme: light;
-    --fond: #f6f7ff;
-    --fond-secondaire: #e5def6;
-    --texte: #20243d;
-    --texte-discret: #555c76;
-    --accent: #17676e;
-    --bordure: #20243d26;
+    --fond: #ffffff;
+    --fond-secondaire: #e8faf4;
+    --texte: #121212;
+    --texte-discret: #425b51;
+    --accent: #00634B;
+    --bordure: #12121226;
     --surface: #ffffff70;
 }
 
@@ -184,33 +185,18 @@ h2 {
 }
 
 .carte {
+    --couleur: #00634B;
     min-width: 0;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     padding: 24px;
     background: #fff;
-    color: #20243d;
+    color: #121212;
     border: 2px solid transparent;
     border-radius: 18px;
     text-decoration: none;
     transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.youtube {
-    --couleur: #c51d2c;
-}
-
-.twitch {
-    --couleur: #6940b5;
-}
-
-.instagram {
-    --couleur: #b82772;
-}
-
-.tiktok {
-    --couleur: #13666b;
 }
 
 .icone {
@@ -240,7 +226,7 @@ h3 {
 }
 
 .carte p {
-    color: #616579;
+    color: #4d5c55;
     font-size: 13px;
     margin: 0 0 26px;
 }
@@ -383,10 +369,6 @@ code { font-family: monospace; }
 .bouton-demo { padding: 10px 18px; background: var(--accent); color: var(--fond); border: 0; border-radius: 8px; cursor: pointer; }
 
 /* Couleurs et logos des deux nouveaux réseaux. */
-.snapchat {
-    --couleur: #665c00;
-}
-
 .snapchat .icone {
     background: #fffc00;
     border-radius: 18px;
@@ -397,6 +379,89 @@ code { font-family: monospace; }
     height: 58px;
 }
 
-.discord {
-    --couleur: #4752c4;
+
+/* 11. VERRE TRANSLUCIDE : FLOU, REFLETS ET PROFONDEUR */
+:root {
+    --verre: #123d32e8;
+    --verre-transparent: #ffffff0d;
+    --reflet: #ffffff26;
+    --ombre-verre: #00000033;
+}
+
+body.theme-clair {
+    --verre: #fffffff0;
+    --verre-transparent: #ffffff80;
+    --reflet: #ffffffc9;
+    --ombre-verre: #0046321a;
+}
+
+body {
+    background:
+        radial-gradient(ellipse at 10% 8%, #2ee7c433, transparent 50%),
+        radial-gradient(ellipse at 92% 65%, #2ee7c426, transparent 48%),
+        linear-gradient(135deg, var(--fond), var(--fond-secondaire));
+    background-attachment: fixed;
+}
+
+/* Un fond opaque reste lisible si le navigateur ne gère pas le flou. */
+.carte, .bloc-cours, .bouton-theme, .langages a, .etiquette {
+    background: var(--verre);
+    border: 1px solid var(--bordure);
+    box-shadow: inset 0 1px 0 var(--reflet), 0 12px 32px var(--ombre-verre);
+}
+
+/* Safari utilise aussi la propriété avec le préfixe -webkit-. */
+@supports ((backdrop-filter: blur(20px)) or (-webkit-backdrop-filter: blur(20px))) {
+    .carte, .bloc-cours, .bouton-theme, .langages a, .etiquette {
+        background: linear-gradient(135deg, var(--reflet), transparent 55%), var(--verre-transparent);
+        -webkit-backdrop-filter: blur(20px) saturate(150%);
+        backdrop-filter: blur(20px) saturate(150%);
+    }
+}
+
+.carte {
+    color: var(--texte);
+    border-radius: 24px;
+    transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+}
+
+.carte p {
+    color: var(--texte-discret);
+}
+
+.ouvrir {
+    color: var(--accent);
+}
+
+.carte:hover, .carte:focus-visible {
+    border-color: var(--accent);
+    box-shadow: inset 0 1px 0 var(--reflet), 0 18px 40px var(--ombre-verre);
+}
+
+.icone {
+    overflow: hidden;
+    background: #ffffff;
+    border-radius: 18px;
+    box-shadow: 0 4px 16px #0000000d;
+}
+
+.bloc-cours {
+    border-radius: 24px;
+}
+
+pre {
+    background: var(--surface);
+}
+
+/* Réduit les effets si l’utilisateur préfère moins de transparence. */
+@media (prefers-reduced-transparency: reduce) {
+    .carte, .bloc-cours, .bouton-theme, .langages a, .etiquette {
+        background: var(--verre);
+        -webkit-backdrop-filter: none;
+        backdrop-filter: none;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .carte { transition: none; }
 }

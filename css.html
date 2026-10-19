@@ -31,15 +31,15 @@
 
         <section class="bloc-cours">
             <h2>1. Choisir les couleurs</h2>
-            <p>Dans <code>:root</code>, on définit des variables de couleur réutilisables. Par exemple, <code>--texte</code> est la couleur principale du texte.</p>
+            <p>On reprend le vert menthe, le vert profond et le blanc du site HETIC. Dans <code>:root</code>, on définit des variables de couleur réutilisables. Par exemple, <code>--texte</code> est la couleur principale du texte.</p>
             <pre><code>:root {
     color-scheme: dark;
-    --fond: #101827;
-    --fond-secondaire: #29215b;
-    --texte: #f5f5ff;
-    --texte-discret: #b7bed4;
-    --accent: #80e8ee;
-    --bordure: #ffffff24;
+    --fond: #001810;
+    --fond-secondaire: #00634B;
+    --texte: #ffffff;
+    --texte-discret: #c4ddd5;
+    --accent: #2EE7C4;
+    --bordure: #2ee7c433;
     --surface: #ffffff08;
 }</code></pre>
             <p>On utilise ensuite <code>var(--texte)</code> ou <code>var(--accent)</code> dans les règles CSS. Le fond du <code>body</code> est un dégradé entre <code>--fond</code> et <code>--fond-secondaire</code>. La règle <code>body.theme-clair</code> remplace ces variables quand JavaScript active le thème clair.</p>
@@ -107,6 +107,14 @@
     font-size: clamp(38px, 7vw, 64px);
 }</code></pre>
             <p><code>clamp()</code> adapte le titre à la largeur de l’écran tout en gardant une taille entre 38 et 64 pixels. Nos règles <code>@media</code> réduisent aussi certains espacements sur les petits écrans. Le logo utilise <code>object-fit: contain</code> pour garder ses proportions ; en thème sombre, <code>filter: invert(1)</code> rend le logo noir visible en blanc.</p>
+        </section>
+        <section class="bloc-cours">
+            <h2>6. Créer l’effet de verre translucide</h2>
+            <p>Les cartes, les blocs de cours et les boutons utilisent un fond transparent avec un léger dégradé blanc. Les formes vertes du fond restent visibles à travers : cela donne un effet de verre, inspiré du Liquid Glass.</p>
+            <pre><code>-webkit-backdrop-filter: blur(20px) saturate(150%);
+backdrop-filter: blur(20px) saturate(150%);</code></pre>
+            <p><code>backdrop-filter</code> floute ce qui se trouve derrière le bloc. <code>blur(20px)</code> règle le flou et <code>saturate(150%)</code> renforce les couleurs derrière le verre. La version <code>-webkit-</code> assure la compatibilité avec certaines versions de Safari. On utilise <code>@supports</code> pour garder un fond plus opaque si cet effet n’est pas disponible.</p>
+            <p>Une bordure fine et une ombre intérieure claire créent un reflet sur le bord du verre. Les couleurs sont regroupées dans <code>--verre</code>, <code>--reflet</code> et <code>--ombre-verre</code> ; elles changent aussi avec le thème clair.</p>
         </section>
         <section class="bloc-cours"><h2>Les trois travaillent ensemble</h2><p>HTML définit le contenu, CSS s’occupe de son apparence et JavaScript ajoute des interactions.</p></section>
     </main>
