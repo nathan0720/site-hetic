@@ -5,13 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Découvre JavaScript : les interactions d’une page web, avec une explication simple et un exemple.">
     <title>Comprendre JavaScript — Nathan &amp; Simon</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css?v=langues-copie-1">
+    <script src="script.js?v=langues-copie-1" defer></script>
 </head>
 <body>
     <header class="entete">
         <a class="signature" href="index.html" aria-label="Accueil"><img class="logo-hetic" src="hetic-logo.svg" alt="HETIC" width="52" height="70"></a>
-        <button class="bouton-theme" type="button" aria-pressed="false" hidden>☀ Thème clair</button>
+        <div class="actions-entete">
+            <nav class="choix-langue" aria-label="Langue du site">
+                <a href="javascript.html" lang="fr" hreflang="fr" aria-current="page" aria-label="Français">FR</a>
+                <a href="javascript-en.html" lang="en" hreflang="en" aria-label="English">EN</a>
+            </nav>
+            <button class="bouton-theme" type="button" aria-pressed="false" hidden>☀ Thème clair</button>
+        </div>
     </header>
     <main class="cours">
         <a class="retour" href="index.html">← Retour à l’accueil</a>
@@ -19,11 +25,18 @@
             <p class="etiquette">Les bases du web</p>
             <h1 id="titre">C’est quoi <span>JavaScript</span> ?</h1>
             <p class="introduction">Les interactions d’une page web</p>
-            <nav class="langages" aria-label="Les cours"><a href="html.html">HTML</a><a href="css.html">CSS</a><a href="javascript.html">JavaScript</a></nav>
+            <nav class="langages" aria-label="Les cours"><a href="html.html"><span class="nom-langage">HTML</span><span class="aide-langage">La structure <span aria-hidden="true">→</span></span></a><a href="css.html"><span class="nom-langage">CSS</span><span class="aide-langage">Le style <span aria-hidden="true">→</span></span></a><a href="javascript.html"><span class="nom-langage">JavaScript</span><span class="aide-langage">Les interactions <span aria-hidden="true">→</span></span></a></nav>
         </section>
         <section class="bloc-cours"><h2>Définition</h2><p>JavaScript est un langage de programmation. Dans le navigateur, il permet de faire réagir une page aux actions des utilisateurs et de modifier son contenu.</p></section>
         <section class="bloc-cours"><h2>À quoi sert JavaScript ?</h2><p>Il permet par exemple d’ouvrir un menu, de vérifier un formulaire ou de changer un thème. Sur notre site, le bouton de thème fonctionne grâce au fichier script.js.</p></section>
 
+
+        <section class="bloc-cours">
+            <h2>Comment appliquer ce JavaScript à une page HTML ?</h2>
+            <p>On écrit les instructions dans <code>script.js</code>, puis on place cette balise dans le <code>&lt;head&gt;</code> de chaque page :</p>
+            <pre><code>&lt;script src=&quot;script.js&quot; defer&gt;&lt;/script&gt;</code></pre>
+            <p><code>src</code> donne le chemin du fichier. Grâce à <code>defer</code>, les boutons et paragraphes HTML existent avant que le script essaie de les retrouver. On écrit uniquement du JavaScript dans le fichier <code>.js</code> ; les balises <code>&lt;script&gt;</code> restent dans le fichier HTML.</p>
+        </section>
         <section class="bloc-cours">
             <h2>Comment fonctionne le JavaScript de cette page ?</h2>
             <p>Toutes les pages chargent <code>script.js</code> avec <code>defer</code>. Ce fichier gère le thème, la petite démonstration et la mise en évidence du cours ouvert. Les extraits ci-dessous viennent de notre script.</p>
@@ -36,7 +49,7 @@
 
 function appliquerTheme(clair) {
     document.body.classList.toggle(&#x27;theme-clair&#x27;, clair);
-    boutonTheme.textContent = clair ? &#x27;☾ Thème sombre&#x27; : &#x27;☀ Thème clair&#x27;;
+    boutonTheme.textContent = clair ? textes.themeSombre : textes.themeClair;
     boutonTheme.setAttribute(&#x27;aria-pressed&#x27;, String(clair));
 }</code></pre>
             <p><code>const</code> déclare une variable qu’on ne réaffecte pas. <code>querySelector</code> trouve le bouton grâce à sa classe. Le paramètre <code>clair</code> vaut <code>true</code> ou <code>false</code>. <code>classList.toggle</code> ajoute ou retire <code>theme-clair</code> sur le <code>body</code> : le CSS applique alors les bonnes couleurs. L’expression <code>clair ? ... : ...</code> choisit le texte du bouton. <code>String(clair)</code> transforme le booléen en texte pour l’attribut d’accessibilité.</p>
@@ -76,7 +89,7 @@ boutonTheme.hidden = false;</code></pre>
 const messageDemo = document.querySelector(&#x27;#message-demo&#x27;);
 if (boutonDemo &amp;&amp; messageDemo) {
     boutonDemo.addEventListener(&#x27;click&#x27;, function () {
-        messageDemo.textContent = &#x27;Bravo ! JavaScript a modifié le texte de la page.&#x27;;
+        messageDemo.textContent = textes.demo;
     });
 }</code></pre>
             <p>Le symbole <code>#</code> cible un identifiant HTML. La condition <code>if (boutonDemo &amp;&amp; messageDemo)</code> vérifie que les deux éléments existent. Cela évite une erreur sur les autres pages, qui chargent le même script sans avoir cette démonstration. Au clic, <code>textContent</code> remplace le texte du paragraphe. Son attribut HTML <code>aria-live="polite"</code> permet aux lecteurs d’écran d’annoncer la modification.</p>
@@ -92,6 +105,21 @@ document.querySelectorAll(&#x27;.langages a&#x27;).forEach(function (lien) {
     }
 });</code></pre>
             <p><code>window.location.pathname</code> donne le chemin de la page. <code>split</code> le découpe aux barres obliques et <code>pop</code> récupère le dernier morceau, par exemple <code>javascript.html</code>. <code>querySelectorAll</code> récupère tous les liens de cours et <code>forEach</code> les parcourt. Si un lien correspond à la page ouverte, on lui ajoute <code>aria-current="page"</code>. Le CSS utilise cet attribut pour le colorer. Le changement de page lui-même est assuré par les liens HTML.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>6. Afficher le site en français ou en anglais</h2>
+            <p>Les boutons <strong>FR</strong> et <strong>EN</strong> ouvrent deux versions de la même page. Par exemple, <code>html.html</code> est en français et <code>html-en.html</code> en anglais. Les liens de cours restent ensuite dans la langue choisie.</p>
+            <pre><code>const anglais = document.documentElement.lang === &#x27;en&#x27;;</code></pre>
+            <p>Dans chaque fichier HTML, l’attribut <code>lang</code> indique <code>fr</code> ou <code>en</code>. Notre objet <code>textes</code> choisit alors les libellés du thème, du bouton de copie et de la démonstration. Ainsi, <code>textes.demo</code> et <code>textes.themeClair</code> suivent la langue de la page.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>7. Copier un exemple dans le presse-papiers</h2>
+            <p>Le script ajoute un bouton « Copier le code » devant chaque extrait. Il lit uniquement le contenu du <code>&lt;code&gt;</code>, pour copier du texte sans les balises de présentation. Voici le principe simplifié :</p>
+            <pre><code>const code = document.querySelector(&quot;pre &gt; code&quot;);
+await navigator.clipboard.writeText(code.textContent);</code></pre>
+            <p>Dans notre vrai script, cette instruction se trouve dans la fonction <code>async</code> appelée lors du clic. <code>await</code> attend la fin de la copie avant d’afficher « Copié ! ». Sur GitHub Pages, la connexion HTTPS permet d’utiliser cette API. Si elle échoue, on essaie une méthode de repli avec un champ de texte temporaire ; si aucune copie n’est possible, un message propose de copier manuellement.</p>
         </section>
         <section class="bloc-cours" aria-labelledby="titre-demo"><h2 id="titre-demo">À toi d’essayer</h2><button id="bouton-demo" class="bouton-demo" type="button">Clique ici</button><p id="message-demo" aria-live="polite">Ce texte va changer quand tu cliqueras.</p></section>
         <section class="bloc-cours"><h2>Les trois travaillent ensemble</h2><p>HTML définit le contenu, CSS s’occupe de son apparence et JavaScript ajoute des interactions.</p></section>

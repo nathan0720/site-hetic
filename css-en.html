@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn about CSS and how this website is styled, with explanations and code examples.">
+    <title>Understanding CSS — Nathan &amp; Simon</title>
+    <link rel="stylesheet" href="style.css?v=langues-copie-1">
+    <script src="script.js?v=langues-copie-1" defer></script>
+</head>
+<body>
+    <header class="entete">
+        <a class="signature" href="index-en.html" aria-label="Home"><img class="logo-hetic" src="hetic-logo.svg" alt="HETIC" width="52" height="70"></a>
+        <div class="actions-entete">
+            <nav class="choix-langue" aria-label="Site language">
+                <a href="css.html" lang="fr" hreflang="fr" aria-label="Français">FR</a>
+                <a href="css-en.html" lang="en" hreflang="en" aria-current="page" aria-label="English">EN</a>
+            </nav>
+            <button class="bouton-theme" type="button" aria-pressed="false" hidden>☀ Light theme</button>
+        </div>
+    </header>
+    <main class="cours">
+        <a class="retour" href="index-en.html">← Back to home</a>
+        <section class="presentation" aria-labelledby="titre">
+            <p class="etiquette">Web basics</p>
+            <h1 id="titre">What is <span>CSS</span>?</h1>
+            <p class="introduction">The style of a web page</p>
+            <nav class="langages" aria-label="Lessons"><a href="html-en.html"><span class="nom-langage">HTML</span><span class="aide-langage">The structure <span aria-hidden="true">→</span></span></a><a href="css-en.html"><span class="nom-langage">CSS</span><span class="aide-langage">The style <span aria-hidden="true">→</span></span></a><a href="javascript-en.html"><span class="nom-langage">JavaScript</span><span class="aide-langage">The interactions <span aria-hidden="true">→</span></span></a></nav>
+        </section>
+        <section class="bloc-cours"><h2>Definition</h2><p>CSS stands for Cascading Style Sheets. This language defines how HTML elements are presented.</p></section>
+        <section class="bloc-cours"><h2>What is CSS used for?</h2><p>CSS lets us choose colours, fonts, spacing and the arrangement of elements. It also adapts the layout for phones and computers.</p></section>
+
+
+        <section class="bloc-cours">
+            <h2>How do you apply this CSS to an HTML page?</h2>
+            <p>Write your rules in <code>style.css</code>, then add this line inside the <code>&lt;head&gt;</code> of every HTML page:</p>
+            <pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;</code></pre>
+            <p>The path is relative to the HTML file. Since our files share a folder, the filename is enough. An HTML class such as <code>class="bloc-cours"</code> is targeted by <code>.bloc-cours</code> in CSS. Updating the shared file changes the appearance of every page that loads it.</p>
+        </section>
+        <section class="bloc-cours">
+            <h2>How did we style this page?</h2>
+            <p>All our pages load the same <code>style.css</code> file, keeping the same colours, logo and lesson blocks throughout the site. These examples come from that file.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>1. Choose the colours</h2>
+            <p>We use the mint green, deep green and white from HETIC’s website. In <code>:root</code>, we define reusable colour variables. For example, <code>--texte</code> is the main text colour.</p>
+            <pre><code>:root {
+    color-scheme: dark;
+    --fond: #001810;
+    --fond-secondaire: #00634B;
+    --texte: #ffffff;
+    --texte-discret: #c4ddd5;
+    --accent: #2EE7C4;
+    --bordure: #2ee7c433;
+    --surface: #ffffff08;
+}</code></pre>
+            <p>We then use <code>var(--texte)</code> or <code>var(--accent)</code> in CSS rules. The <code>body</code> background blends <code>--fond</code> and <code>--fond-secondaire</code>. The <code>body.theme-clair</code> rule replaces these variables when JavaScript activates the light theme.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>2. Centre the content and limit its width</h2>
+            <p>These rules leave space at the sides and prevent explanations from stretching across the entire screen.</p>
+            <pre><code>.entete, main, footer {
+    width: min(1080px, calc(100% - 48px));
+    margin-inline: auto;
+}
+
+.cours {
+    max-width: 760px;
+    padding-block: 28px 60px;
+}</code></pre>
+            <p><code>min()</code> picks the smaller of two widths. <code>calc(100% - 48px)</code> reserves 24 pixels on each side. <code>margin-inline: auto</code> centres the content. On lesson pages, <code>max-width</code> limits it to 760 pixels, and <code>padding-block</code> adds space above and below.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>3. Create the explanation blocks</h2>
+            <p>Each section on this page has the <code>bloc-cours</code> class. The dot in <code>.bloc-cours</code> means the selector targets a class.</p>
+            <pre><code>.bloc-cours {
+    padding: 24px;
+    margin-bottom: 20px;
+    border: 1px solid var(--bordure);
+    border-radius: 18px;
+    background: var(--surface);
+}</code></pre>
+            <p><code>padding</code> adds space inside a block. <code>margin-bottom</code> separates it from the next block. <code>border</code> draws the outline, <code>border-radius</code> rounds the corners, and <code>background</code> adds a slightly transparent fill. Later glass-effect rules add the final blur and reflections.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>4. Align the links and highlight the current page</h2>
+            <p>We use Flexbox to place the HTML, CSS and JavaScript links next to each other.</p>
+            <pre><code>.langages {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.langages a {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    min-width: 150px;
+    min-height: 80px;
+    padding: 14px 20px;
+    border-radius: 16px;
+    text-align: left;
+    transition: transform 0.2s, border-color 0.2s;
+}</code></pre>
+            <p><code>justify-content: center</code> centres the links. <code>gap</code> spaces them apart, and <code>flex-wrap: wrap</code> lets them move to another line. <code>min-height: 80px</code> and padding enlarge the clickable area. <code>flex-direction: column</code> stacks the language name and description. <code>:hover</code> changes their appearance when the pointer is over them. The <code>[aria-current="page"]</code> selector highlights the open lesson; JavaScript adds this attribute.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>5. Display code and adapt to screen sizes</h2>
+            <p>Code examples preserve line breaks through the HTML <code>&lt;pre&gt;</code> tag. CSS adds a border and enables horizontal scrolling when a line is too long.</p>
+            <pre><code>pre {
+    overflow-x: auto;
+    padding: 18px;
+    border-radius: 10px;
+    background: var(--fond);
+    border: 1px solid var(--bordure);
+}
+
+.cours h1 {
+    font-size: clamp(38px, 7vw, 64px);
+}</code></pre>
+            <p><code>clamp()</code> adapts the heading to the screen width while keeping its size between 38 and 64 pixels. Our <code>@media</code> rules also reduce some spacing on small screens. The logo uses <code>object-fit: contain</code> to preserve its proportions. In dark mode, <code>filter: invert(1)</code> turns the black logo white.</p>
+        </section>
+        <section class="bloc-cours">
+            <h2>6. Create the translucent glass effect</h2>
+            <p>Cards, lesson blocks and buttons use a transparent fill with a subtle white gradient. Green shapes in the background remain visible through them, creating a glass effect inspired by Liquid Glass.</p>
+            <pre><code>-webkit-backdrop-filter: blur(20px) saturate(150%);
+backdrop-filter: blur(20px) saturate(150%);</code></pre>
+            <p><code>backdrop-filter</code> blurs what is behind the block. <code>blur(20px)</code> sets the blur, and <code>saturate(150%)</code> boosts the colours behind the glass. The <code>-webkit-</code> version supports some Safari versions. We use <code>@supports</code> to keep a more opaque background when the effect is unavailable.</p>
+            <p>A fine border and a light inset shadow create a reflection along the glass edge. Colours are grouped in <code>--verre</code>, <code>--reflet</code> and <code>--ombre-verre</code>; they also change with the light theme.</p>
+        </section>
+        <section class="bloc-cours"><h2>All three work together</h2><p>HTML defines the content, CSS handles its appearance, and JavaScript adds interactions.</p></section>
+    </main>
+    <footer><p>Designed and coded by <strong>Nathan &amp; Simon</strong></p><p>First steps, big ideas.</p></footer>
+</body>
+</html>

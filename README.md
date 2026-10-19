@@ -2,6 +2,13 @@
 
 Site réalisé en HTML, CSS et JavaScript : présentation, liens vers nos réseaux préférés et explications du code utilisé.
 
+## Fonctions
+
+- Français et anglais, avec changement de langue sur chaque page.
+- Copie des extraits de code dans le presse-papiers.
+- Cours HTML, CSS et JavaScript avec explications de leur intégration.
+- Palette HETIC, effet de verre et thèmes clair/sombre.
+
 ## Ouvrir le site
 
 Ouvrir `index.html` dans un navigateur. Tous les styles, scripts et logos sont inclus dans le dépôt.
@@ -16,7 +23,8 @@ Le fichier `.nojekyll` permet de publier directement les fichiers statiques.
 
 - `index.html` : accueil et réseaux sociaux.
 - `html.html`, `css.html`, `javascript.html` : explications et extraits du code du site.
+- `index-en.html`, `html-en.html`, `css-en.html`, `javascript-en.html` : versions anglaises.
 - `style.css` : mise en page et thèmes.
 - `script.js` : changement de thème et démonstration interactive.
 
-Les marques et logos appartiennent à leurs propriétaires respectifs. Les icônes Snapchat et Discord proviennent de Simple Icons ; le logo HETIC provient du site de l’école.
+Les marques et logos appartiennent à leurs propriétaires respectifs. Les icônes des réseaux sociaux sont au format SVG et proviennent de Simple Icons ; le logo HETIC provient du site de l’école.

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn about JavaScript and how this website works, with explanations and code examples.">
+    <title>Understanding JavaScript — Nathan &amp; Simon</title>
+    <link rel="stylesheet" href="style.css?v=langues-copie-1">
+    <script src="script.js?v=langues-copie-1" defer></script>
+</head>
+<body>
+    <header class="entete">
+        <a class="signature" href="index-en.html" aria-label="Home"><img class="logo-hetic" src="hetic-logo.svg" alt="HETIC" width="52" height="70"></a>
+        <div class="actions-entete">
+            <nav class="choix-langue" aria-label="Site language">
+                <a href="javascript.html" lang="fr" hreflang="fr" aria-label="Français">FR</a>
+                <a href="javascript-en.html" lang="en" hreflang="en" aria-current="page" aria-label="English">EN</a>
+            </nav>
+            <button class="bouton-theme" type="button" aria-pressed="false" hidden>☀ Light theme</button>
+        </div>
+    </header>
+    <main class="cours">
+        <a class="retour" href="index-en.html">← Back to home</a>
+        <section class="presentation" aria-labelledby="titre">
+            <p class="etiquette">Web basics</p>
+            <h1 id="titre">What is <span>JavaScript</span>?</h1>
+            <p class="introduction">The interactions on a web page</p>
+            <nav class="langages" aria-label="Lessons"><a href="html-en.html"><span class="nom-langage">HTML</span><span class="aide-langage">The structure <span aria-hidden="true">→</span></span></a><a href="css-en.html"><span class="nom-langage">CSS</span><span class="aide-langage">The style <span aria-hidden="true">→</span></span></a><a href="javascript-en.html"><span class="nom-langage">JavaScript</span><span class="aide-langage">The interactions <span aria-hidden="true">→</span></span></a></nav>
+        </section>
+        <section class="bloc-cours"><h2>Definition</h2><p>JavaScript is a programming language. In the browser, it lets a page respond to user actions and change its content.</p></section>
+        <section class="bloc-cours"><h2>What is JavaScript used for?</h2><p>It can open menus, check forms or change a theme. On our site, the theme button works through <code>script.js</code>.</p></section>
+
+
+        <section class="bloc-cours">
+            <h2>How do you apply this JavaScript to an HTML page?</h2>
+            <p>Write your instructions in <code>script.js</code>, then place this tag in the <code>&lt;head&gt;</code> of every page:</p>
+            <pre><code>&lt;script src=&quot;script.js&quot; defer&gt;&lt;/script&gt;</code></pre>
+            <p><code>src</code> gives the file path. With <code>defer</code>, HTML buttons and paragraphs exist before the script tries to find them. Write only JavaScript in the <code>.js</code> file; the <code>&lt;script&gt;</code> tags stay in the HTML file.</p>
+        </section>
+        <section class="bloc-cours">
+            <h2>How does this page’s JavaScript work?</h2>
+            <p>Every page loads <code>script.js</code> with <code>defer</code>. This file manages the theme, the demonstration and the active lesson highlight. The examples below come from our script. Code examples keep the French identifiers and text from the original site.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>1. Find the button and apply a theme</h2>
+            <p>We start by finding the theme button in the HTML. A function then groups the instructions needed to change its state.</p>
+            <pre><code>const boutonTheme = document.querySelector(&#x27;.bouton-theme&#x27;);
+
+function appliquerTheme(clair) {
+    document.body.classList.toggle(&#x27;theme-clair&#x27;, clair);
+    boutonTheme.textContent = clair ? textes.themeSombre : textes.themeClair;
+    boutonTheme.setAttribute(&#x27;aria-pressed&#x27;, String(clair));
+}</code></pre>
+            <p><code>const</code> declares a variable that we do not reassign. <code>querySelector</code> finds the button by its class. The <code>clair</code> parameter is either <code>true</code> or <code>false</code>. <code>classList.toggle</code> adds or removes <code>theme-clair</code> on the <code>body</code>, so CSS applies the right colours. <code>clair ? ... : ...</code> chooses the button’s label from <code>textes</code>, our language-specific labels. <code>String(clair)</code> converts the boolean into text for the accessibility attribute.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>2. Restore the chosen theme</h2>
+            <p>When the page loads, we try to read the theme stored in the browser.</p>
+            <pre><code>try {
+    appliquerTheme(localStorage.getItem(&#x27;nathan-simon-theme&#x27;) === &#x27;clair&#x27;);
+} catch {
+    appliquerTheme(false);
+}
+boutonTheme.hidden = false;</code></pre>
+            <p><code>localStorage</code> stores a value in the browser. <code>getItem</code> reads it, and <code>===</code> checks whether it equals <code>clair</code>. If storage access fails, <code>catch</code> activates the dark theme. Finally, <code>hidden = false</code> shows the button.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>3. Respond to a click on the theme button</h2>
+            <p>An event listener waits for the user to click the button.</p>
+            <pre><code>boutonTheme.addEventListener(&#x27;click&#x27;, function () {
+    const clair = !document.body.classList.contains(&#x27;theme-clair&#x27;);
+    appliquerTheme(clair);
+    try {
+        localStorage.setItem(&#x27;nathan-simon-theme&#x27;, clair ? &#x27;clair&#x27; : &#x27;sombre&#x27;);
+    } catch {
+        // Le bouton reste utilisable si le stockage est désactivé.
+    }
+});</code></pre>
+            <p><code>contains</code> checks whether the class is present. The <code>!</code> symbol reverses the answer: if the light theme is active, we switch to dark, and vice versa. We apply the new theme, then <code>setItem</code> saves the choice for other pages and future visits when the browser allows it.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>4. Make the demonstration button work</h2>
+            <p>Further down this page, the “Click here” button changes the paragraph immediately below it.</p>
+            <pre><code>const boutonDemo = document.querySelector(&#x27;#bouton-demo&#x27;);
+const messageDemo = document.querySelector(&#x27;#message-demo&#x27;);
+if (boutonDemo &amp;&amp; messageDemo) {
+    boutonDemo.addEventListener(&#x27;click&#x27;, function () {
+        messageDemo.textContent = textes.demo;
+    });
+}</code></pre>
+            <p>The <code>#</code> symbol targets an HTML identifier. <code>if (boutonDemo &amp;&amp; messageDemo)</code> checks that both elements exist. This avoids errors on other pages, which load the same script without the demonstration. On a click, <code>textContent</code> replaces the paragraph text with the message from <code>textes.demo</code>. The HTML <code>aria-live="polite"</code> attribute allows screen readers to announce the update.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>5. Highlight the current lesson</h2>
+            <p>The script compares the open filename with the destination of each lesson link.</p>
+            <pre><code>const pageActuelle = window.location.pathname.split(&#x27;/&#x27;).pop();
+document.querySelectorAll(&#x27;.langages a&#x27;).forEach(function (lien) {
+    if (lien.getAttribute(&#x27;href&#x27;) === pageActuelle) {
+        lien.setAttribute(&#x27;aria-current&#x27;, &#x27;page&#x27;);
+    }
+});</code></pre>
+            <p><code>window.location.pathname</code> gives the page path. <code>split</code> separates it at each slash, and <code>pop</code> retrieves the last part, such as <code>javascript-en.html</code>. <code>querySelectorAll</code> finds all lesson links, and <code>forEach</code> goes through them. When a link matches the open page, we add <code>aria-current="page"</code>. CSS uses that attribute to highlight it. HTML links handle the navigation itself.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>6. Show the site in French or English</h2>
+            <p>The <strong>FR</strong> and <strong>EN</strong> buttons open two versions of the same page. For example, <code>html.html</code> is French and <code>html-en.html</code> is English. Lesson links then stay in the chosen language.</p>
+            <pre><code>const anglais = document.documentElement.lang === &#x27;en&#x27;;</code></pre>
+            <p>In each HTML file, the <code>lang</code> attribute is either <code>fr</code> or <code>en</code>. Our <code>textes</code> object chooses labels for the theme, copy button and demonstration. This makes <code>textes.demo</code> and <code>textes.themeClair</code> follow the page language.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>7. Copy an example to the clipboard</h2>
+            <p>The script adds a “Copy code” button before each example. It reads only the content of <code>&lt;code&gt;</code>, copying plain text without the presentation markup. Here is the simplified idea:</p>
+            <pre><code>const code = document.querySelector(&quot;pre &gt; code&quot;);
+await navigator.clipboard.writeText(code.textContent);</code></pre>
+            <p>In our actual script, this instruction runs inside an <code>async</code> function called on a click. <code>await</code> waits for copying to finish before displaying “Copied!”. On GitHub Pages, HTTPS allows this API to be used. If it fails, we try a temporary text field as a fallback. If copying still fails, a message suggests copying manually.</p>
+        </section>
+        <section class="bloc-cours" aria-labelledby="titre-demo"><h2 id="titre-demo">Try it yourself</h2><button id="bouton-demo" class="bouton-demo" type="button">Click here</button><p id="message-demo" aria-live="polite">This text will change when you click.</p></section>
+        <section class="bloc-cours"><h2>All three work together</h2><p>HTML defines the content, CSS handles its appearance, and JavaScript adds interactions.</p></section>
+    </main>
+    <footer><p>Designed and coded by <strong>Nathan &amp; Simon</strong></p><p>First steps, big ideas.</p></footer>
+</body>
+</html>

@@ -5,13 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Découvre HTML : la structure d’une page web, avec une explication simple et un exemple.">
     <title>Comprendre HTML — Nathan &amp; Simon</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css?v=langues-copie-1">
+    <script src="script.js?v=langues-copie-1" defer></script>
 </head>
 <body>
     <header class="entete">
         <a class="signature" href="index.html" aria-label="Accueil"><img class="logo-hetic" src="hetic-logo.svg" alt="HETIC" width="52" height="70"></a>
-        <button class="bouton-theme" type="button" aria-pressed="false" hidden>☀ Thème clair</button>
+        <div class="actions-entete">
+            <nav class="choix-langue" aria-label="Langue du site">
+                <a href="html.html" lang="fr" hreflang="fr" aria-current="page" aria-label="Français">FR</a>
+                <a href="html-en.html" lang="en" hreflang="en" aria-label="English">EN</a>
+            </nav>
+            <button class="bouton-theme" type="button" aria-pressed="false" hidden>☀ Thème clair</button>
+        </div>
     </header>
     <main class="cours">
         <a class="retour" href="index.html">← Retour à l’accueil</a>
@@ -19,7 +25,7 @@
             <p class="etiquette">Les bases du web</p>
             <h1 id="titre">C’est quoi <span>HTML</span> ?</h1>
             <p class="introduction">La structure d’une page web</p>
-            <nav class="langages" aria-label="Les cours"><a href="html.html">HTML</a><a href="css.html">CSS</a><a href="javascript.html">JavaScript</a></nav>
+            <nav class="langages" aria-label="Les cours"><a href="html.html"><span class="nom-langage">HTML</span><span class="aide-langage">La structure <span aria-hidden="true">→</span></span></a><a href="css.html"><span class="nom-langage">CSS</span><span class="aide-langage">Le style <span aria-hidden="true">→</span></span></a><a href="javascript.html"><span class="nom-langage">JavaScript</span><span class="aide-langage">Les interactions <span aria-hidden="true">→</span></span></a></nav>
         </section>
         <section class="bloc-cours"><h2>Définition</h2><p>HTML signifie HyperText Markup Language. C’est un langage de balisage : il décrit le contenu et la structure d’une page web.</p></section>
         <section class="bloc-cours"><h2>À quoi sert HTML ?</h2><p>Il sert à créer des titres, des paragraphes, des liens, des images ou des formulaires. Les balises indiquent au navigateur le rôle de chaque élément.</p></section>
@@ -75,6 +81,36 @@
     &lt;p&gt;HTML signifie HyperText Markup Language. C’est un langage de balisage : il décrit le contenu et la structure d’une page web.&lt;/p&gt;
 &lt;/section&gt;</code></pre>
             <p>La classe <code>bloc-cours</code> donne à chaque section son cadre et ses espacements grâce au CSS. Les extraits de code sont affichés dans <code>&lt;pre&gt;&lt;code&gt;</code> pour conserver les retours à la ligne. Pour montrer une balise sans que le navigateur l’interprète, on écrit par exemple <code>&amp;lt;h1&amp;gt;</code> dans le fichier HTML. Enfin, <code>&lt;footer&gt;</code> contient la signature en bas de la page.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>Relier HTML, CSS et JavaScript : les trois fichiers</h2>
+            <p>Dans notre dossier, on place <code>index.html</code>, <code>style.css</code> et <code>script.js</code> côte à côte. Chaque page HTML charge les deux autres fichiers dans son <code>&lt;head&gt;</code>.</p>
+            <pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
+&lt;script src=&quot;script.js&quot; defer&gt;&lt;/script&gt;</code></pre>
+            <p><code>rel="stylesheet"</code> indique au navigateur qu’il s’agit d’une feuille de style. <code>href</code> pointe vers le CSS et <code>src</code> vers le JavaScript. <code>defer</code> permet de télécharger le script pendant la lecture du HTML, puis de l’exécuter quand les éléments de la page sont disponibles. La partie <code>?v=langues-copie-1</code> ajoutée dans nos vraies pages sert à demander la nouvelle version de ces fichiers au navigateur.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>Comment le CSS reconnaît-il les éléments HTML ?</h2>
+            <p>Dans le HTML, on donne une classe à un élément. Dans le CSS, on cible cette classe avec un point devant son nom. Ici, c’est le même principe que pour nos blocs de cours.</p>
+            <pre><code>&lt;section class=&quot;bloc-cours&quot;&gt;
+    &lt;h2&gt;Notre premier cours&lt;/h2&gt;
+&lt;/section&gt;</code></pre>
+            <p>Dans <code>style.css</code> :</p>
+            <pre><code>.bloc-cours {
+    padding: 24px;
+    border: 1px solid var(--bordure);
+}</code></pre>
+            <p>Ces deux morceaux se placent dans des fichiers séparés : le HTML dans la page <code>.html</code>, et la règle <code>.bloc-cours</code> dans <code>style.css</code>. Les variables comme <code>--bordure</code> sont définies dans <code>:root</code>.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>Comment JavaScript retrouve-t-il un élément HTML ?</h2>
+            <p>On peut donner un identifiant avec <code>id</code>, puis le retrouver avec <code>document.querySelector</code> et un <code>#</code>. Notre démonstration utilise ces éléments HTML :</p>
+            <pre><code>&lt;button id=&quot;bouton-demo&quot; type=&quot;button&quot;&gt;Clique ici&lt;/button&gt;
+&lt;p id=&quot;message-demo&quot; aria-live=&quot;polite&quot;&gt;Ce texte va changer quand tu cliqueras.&lt;/p&gt;</code></pre>
+            <p>Dans <code>script.js</code>, <code>document.querySelector("#bouton-demo")</code> retrouve ce bouton. On écoute ensuite son événement <code>click</code> pour modifier le paragraphe <code>#message-demo</code>. Tu peux tester cet exemple sur la page JavaScript.</p>
         </section>
         <section class="bloc-cours"><h2>Les trois travaillent ensemble</h2><p>HTML définit le contenu, CSS s’occupe de son apparence et JavaScript ajoute des interactions.</p></section>
     </main>

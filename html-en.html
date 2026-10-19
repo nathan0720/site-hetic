@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn about HTML and how this website is built, with explanations and code examples.">
+    <title>Understanding HTML — Nathan &amp; Simon</title>
+    <link rel="stylesheet" href="style.css?v=langues-copie-1">
+    <script src="script.js?v=langues-copie-1" defer></script>
+</head>
+<body>
+    <header class="entete">
+        <a class="signature" href="index-en.html" aria-label="Home"><img class="logo-hetic" src="hetic-logo.svg" alt="HETIC" width="52" height="70"></a>
+        <div class="actions-entete">
+            <nav class="choix-langue" aria-label="Site language">
+                <a href="html.html" lang="fr" hreflang="fr" aria-label="Français">FR</a>
+                <a href="html-en.html" lang="en" hreflang="en" aria-current="page" aria-label="English">EN</a>
+            </nav>
+            <button class="bouton-theme" type="button" aria-pressed="false" hidden>☀ Light theme</button>
+        </div>
+    </header>
+    <main class="cours">
+        <a class="retour" href="index-en.html">← Back to home</a>
+        <section class="presentation" aria-labelledby="titre">
+            <p class="etiquette">Web basics</p>
+            <h1 id="titre">What is <span>HTML</span>?</h1>
+            <p class="introduction">The structure of a web page</p>
+            <nav class="langages" aria-label="Lessons"><a href="html-en.html"><span class="nom-langage">HTML</span><span class="aide-langage">The structure <span aria-hidden="true">→</span></span></a><a href="css-en.html"><span class="nom-langage">CSS</span><span class="aide-langage">The style <span aria-hidden="true">→</span></span></a><a href="javascript-en.html"><span class="nom-langage">JavaScript</span><span class="aide-langage">The interactions <span aria-hidden="true">→</span></span></a></nav>
+        </section>
+        <section class="bloc-cours"><h2>Definition</h2><p>HTML stands for HyperText Markup Language. It is a markup language that describes the content and structure of a web page.</p></section>
+        <section class="bloc-cours"><h2>What is HTML used for?</h2><p>It creates headings, paragraphs, links, images and forms. Tags tell the browser what each element is for.</p></section>
+
+        <section class="bloc-cours">
+            <h2>How did we build this page?</h2>
+            <p>This is <code>html-en.html</code>, the English version of <code>html.html</code>. The CSS and JavaScript pages use the same structure. Below are the actual building blocks and what they do. Code examples keep the French names and text from the original site.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>1. Set up the page and load its files</h2>
+            <p>The beginning of the file declares an HTML document and its language. The <code>&lt;head&gt;</code> contains information about the page. The original French page uses <code>lang="fr"</code>; this English version uses <code>lang="en"</code>.</p>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;fr&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Comprendre HTML — Nathan &amp;amp; Simon&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
+    &lt;script src=&quot;script.js&quot; defer&gt;&lt;/script&gt;
+&lt;/head&gt;</code></pre>
+            <p><code>charset="UTF-8"</code> allows accented characters to display correctly. The <code>viewport</code> line adapts the layout to a phone’s width. <code>&lt;title&gt;</code> names the browser tab. <code>&lt;link&gt;</code> loads our CSS and <code>&lt;script&gt;</code> loads our JavaScript. With <code>defer</code>, the script waits until the HTML has been parsed before it runs.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>2. Display the logo and theme button</h2>
+            <p>The header lives inside <code>&lt;header&gt;</code>. The logo is an image inside a link back to the home page.</p>
+            <pre><code>&lt;header class=&quot;entete&quot;&gt;
+    &lt;a class=&quot;signature&quot; href=&quot;index.html&quot; aria-label=&quot;Accueil&quot;&gt;
+        &lt;img class=&quot;logo-hetic&quot; src=&quot;hetic-logo.svg&quot; alt=&quot;HETIC&quot; width=&quot;52&quot; height=&quot;70&quot;&gt;
+    &lt;/a&gt;
+    &lt;button class=&quot;bouton-theme&quot; type=&quot;button&quot; aria-pressed=&quot;false&quot; hidden&gt;☀ Thème clair&lt;/button&gt;
+&lt;/header&gt;</code></pre>
+            <p><code>src</code> points to the logo file and <code>alt</code> provides replacement text. The <code>class</code> attributes let CSS target these elements. The button starts out hidden with <code>hidden</code>; JavaScript shows it when it is ready. <code>aria-pressed</code> tells assistive technology whether the light theme is active.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>3. Navigate between pages</h2>
+            <p>HTML links provide navigation. Clicking CSS opens <code>css.html</code> in French, or <code>css-en.html</code> in English.</p>
+            <pre><code>&lt;nav class=&quot;langages&quot; aria-label=&quot;Les cours&quot;&gt;
+    &lt;a href=&quot;html.html&quot;&gt;HTML&lt;/a&gt;
+    &lt;a href=&quot;css.html&quot;&gt;CSS&lt;/a&gt;
+    &lt;a href=&quot;javascript.html&quot;&gt;JavaScript&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+            <p><code>&lt;nav&gt;</code> groups the navigation links. Each <code>href</code> gives the name of the file to open in the same folder. These links work even without JavaScript.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>4. Organise the explanations</h2>
+            <p>The main content goes inside <code>&lt;main class="cours"&gt;</code>. The main heading uses <code>&lt;h1&gt;</code>, and each explanation has an <code>&lt;h2&gt;</code> heading.</p>
+            <pre><code>&lt;section class=&quot;bloc-cours&quot;&gt;
+    &lt;h2&gt;Définition&lt;/h2&gt;
+    &lt;p&gt;HTML signifie HyperText Markup Language. C’est un langage de balisage : il décrit le contenu et la structure d’une page web.&lt;/p&gt;
+&lt;/section&gt;</code></pre>
+            <p>The <code>bloc-cours</code> class gives each section its border and spacing through CSS. Examples use <code>&lt;pre&gt;&lt;code&gt;</code> to preserve line breaks. To display a tag without the browser interpreting it, we write something like <code>&amp;lt;h1&amp;gt;</code> in the HTML file. Finally, <code>&lt;footer&gt;</code> contains the signature at the bottom.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>Connect HTML, CSS and JavaScript: three files</h2>
+            <p>We place <code>index.html</code>, <code>style.css</code> and <code>script.js</code> next to each other in the same folder. Every HTML page loads the other two files in its <code>&lt;head&gt;</code>.</p>
+            <pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
+&lt;script src=&quot;script.js&quot; defer&gt;&lt;/script&gt;</code></pre>
+            <p><code>rel="stylesheet"</code> tells the browser that the file is a stylesheet. <code>href</code> points to the CSS and <code>src</code> to the JavaScript. <code>defer</code> lets the script download while the HTML is being parsed, then run once the page elements are available. The <code>?v=langues-copie-1</code> suffix in our actual pages asks the browser to load the new version of these files.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>How does CSS recognise HTML elements?</h2>
+            <p>In HTML, we give an element a class. In CSS, we target that class with a dot before its name. Our lesson blocks use this same approach.</p>
+            <pre><code>&lt;section class=&quot;bloc-cours&quot;&gt;
+    &lt;h2&gt;Notre premier cours&lt;/h2&gt;
+&lt;/section&gt;</code></pre>
+            <p>In <code>style.css</code>:</p>
+            <pre><code>.bloc-cours {
+    padding: 24px;
+    border: 1px solid var(--bordure);
+}</code></pre>
+            <p>Put these two parts in separate files: the HTML in your <code>.html</code> page, and the <code>.bloc-cours</code> rule in <code>style.css</code>. Variables such as <code>--bordure</code> are defined in <code>:root</code>.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>How does JavaScript find an HTML element?</h2>
+            <p>Give an element an <code>id</code>, then find it with <code>document.querySelector</code> and a <code>#</code>. Our demonstration uses these HTML elements:</p>
+            <pre><code>&lt;button id=&quot;bouton-demo&quot; type=&quot;button&quot;&gt;Clique ici&lt;/button&gt;
+&lt;p id=&quot;message-demo&quot; aria-live=&quot;polite&quot;&gt;Ce texte va changer quand tu cliqueras.&lt;/p&gt;</code></pre>
+            <p>In <code>script.js</code>, <code>document.querySelector("#bouton-demo")</code> finds this button. We then listen for its <code>click</code> event to update the <code>#message-demo</code> paragraph. You can try the example on the JavaScript page.</p>
+        </section>
+        <section class="bloc-cours"><h2>All three work together</h2><p>HTML defines the content, CSS handles its appearance, and JavaScript adds interactions.</p></section>
+    </main>
+    <footer><p>Designed and coded by <strong>Nathan &amp; Simon</strong></p><p>First steps, big ideas.</p></footer>
+</body>
+</html>

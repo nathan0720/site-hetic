@@ -465,3 +465,138 @@ pre {
 @media (prefers-reduced-motion: reduce) {
     .carte { transition: none; }
 }
+
+/* 12. LANGUES, ACCÈS AUX COURS ET COPIE DES EXEMPLES */
+.actions-entete {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.choix-langue {
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+    border: 1px solid var(--bordure);
+    border-radius: 30px;
+    background: var(--verre-transparent);
+}
+
+.choix-langue a {
+    display: grid;
+    place-items: center;
+    min-width: 44px;
+    min-height: 36px;
+    padding: 4px 10px;
+    border-radius: 24px;
+    font-size: 13px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.choix-langue a[aria-current="page"] {
+    background: var(--accent);
+    color: var(--fond);
+}
+
+.guide-cours {
+    margin: 28px 0 12px;
+    color: var(--texte-discret);
+    font-size: 14px;
+}
+
+.langages {
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.langages a {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    min-width: 150px;
+    min-height: 80px;
+    padding: 14px 20px;
+    border-radius: 16px;
+    text-align: left;
+    transition: transform 0.2s, border-color 0.2s;
+}
+
+.nom-langage {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.aide-langage {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    width: 100%;
+    color: var(--texte-discret);
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+}
+
+.langages a:hover {
+    transform: translateY(-3px);
+}
+
+.langages a[aria-current="page"] {
+    border-color: var(--accent);
+}
+
+.barre-code {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px 12px;
+    margin-top: 18px;
+}
+
+.bouton-copier {
+    flex-shrink: 0;
+    min-height: 44px;
+    padding: 8px 14px;
+    border: 1px solid var(--bordure);
+    border-radius: 12px;
+    background: var(--surface);
+    color: var(--texte);
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.bouton-copier:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.bouton-copier:disabled { cursor: progress; opacity: 0.6; }
+.statut-copie { color: var(--accent); font-size: 12px; overflow-wrap: anywhere; }
+.barre-code + pre { margin-top: 8px; }
+
+@media (max-width: 600px) {
+    .entete { align-items: flex-start; }
+    .actions-entete { gap: 8px; }
+    .langages a { min-width: 0; flex: 1 1 120px; max-width: 230px; padding: 12px 16px; }
+    .nom-langage { font-size: 18px; }
+    .cours .bloc-cours { padding: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .langages a { transition: none; }
+    .langages a:hover { transform: none; }
+}
+
+@media (max-width: 400px) {
+    .langages a { flex-basis: 100%; max-width: none; min-height: 72px; }
+}
+
+/* Les logos SVG gardent des proportions régulières dans leur fond blanc. */
+.icone img { width: 56px; height: 56px; }
+.instagram img { width: 52px; height: 52px; }

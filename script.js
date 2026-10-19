@@ -1,14 +1,30 @@
+// Les libellés suivent la langue de la page ouverte.
+const anglais = document.documentElement.lang === 'en';
+const textes = anglais ? {
+    themeSombre: '☾ Dark theme',
+    themeClair: '☀ Light theme',
+    demo: 'Well done! JavaScript changed the text on the page.',
+    copier: 'Copy code',
+    copie: 'Copied!',
+    echec: 'Copy unavailable. Select the code and copy it manually.'
+} : {
+    themeSombre: '☾ Thème sombre',
+    themeClair: '☀ Thème clair',
+    demo: 'Bravo ! JavaScript a modifié le texte de la page.',
+    copier: 'Copier le code',
+    copie: 'Copié !',
+    echec: 'Copie indisponible. Sélectionne le code et copie-le manuellement.'
+};
+
 // On récupère le bouton défini dans le HTML.
 const boutonTheme = document.querySelector('.bouton-theme');
 
-// Cette fonction applique le thème et met à jour le texte du bouton.
 function appliquerTheme(clair) {
     document.body.classList.toggle('theme-clair', clair);
-    boutonTheme.textContent = clair ? '☾ Thème sombre' : '☀ Thème clair';
+    boutonTheme.textContent = clair ? textes.themeSombre : textes.themeClair;
     boutonTheme.setAttribute('aria-pressed', String(clair));
 }
 
-// On mémorise le choix entre deux visites, si le navigateur le permet.
 try {
     appliquerTheme(localStorage.getItem('nathan-simon-theme') === 'clair');
 } catch {
@@ -16,7 +32,6 @@ try {
 }
 boutonTheme.hidden = false;
 
-// À chaque clic, on inverse le thème actuel.
 boutonTheme.addEventListener('click', function () {
     const clair = !document.body.classList.contains('theme-clair');
     appliquerTheme(clair);
@@ -27,19 +42,80 @@ boutonTheme.addEventListener('click', function () {
     }
 });
 
-// Exemple de la page JavaScript : réagir au clic sur un bouton.
+// Cette démonstration existe uniquement sur les pages JavaScript.
 const boutonDemo = document.querySelector('#bouton-demo');
 const messageDemo = document.querySelector('#message-demo');
 if (boutonDemo && messageDemo) {
     boutonDemo.addEventListener('click', function () {
-        messageDemo.textContent = 'Bravo ! JavaScript a modifié le texte de la page.';
+        messageDemo.textContent = textes.demo;
     });
 }
 
-// Indique le cours ouvert dans la navigation.
+// Les versions anglaises ont des noms comme html-en.html.
 const pageActuelle = window.location.pathname.split('/').pop();
 document.querySelectorAll('.langages a').forEach(function (lien) {
     if (lien.getAttribute('href') === pageActuelle) {
         lien.setAttribute('aria-current', 'page');
     }
+});
+
+// Copie moderne sur HTTPS, avec une solution de repli pour les fichiers locaux.
+async function copierTexte(texte) {
+    try {
+        await navigator.clipboard.writeText(texte);
+        return;
+    } catch {
+        const champ = document.createElement('textarea');
+        champ.value = texte;
+        champ.setAttribute('readonly', '');
+        champ.style.position = 'fixed';
+        champ.style.opacity = '0';
+        document.body.append(champ);
+        const elementActif = document.activeElement;
+        try {
+            champ.focus({ preventScroll: true });
+            champ.select();
+            if (!document.execCommand('copy')) {
+                throw new Error('Copie refusée');
+            }
+        } finally {
+            champ.remove();
+            elementActif?.focus({ preventScroll: true });
+        }
+    }
+}
+
+// Ajoute un bouton à chaque exemple sans inclure le bouton dans le texte copié.
+document.querySelectorAll('pre > code').forEach(function (code, index) {
+    const bloc = code.parentElement;
+    const barre = document.createElement('div');
+    barre.className = 'barre-code';
+    const bouton = document.createElement('button');
+    bouton.type = 'button';
+    bouton.className = 'bouton-copier';
+    bouton.textContent = textes.copier;
+    bouton.setAttribute('aria-label', textes.copier + ' — ' + (index + 1));
+    const statut = document.createElement('span');
+    statut.className = 'statut-copie';
+    statut.setAttribute('role', 'status');
+    statut.setAttribute('aria-live', 'polite');
+    barre.append(statut, bouton);
+    bloc.before(barre);
+    let minuterie;
+    bouton.addEventListener('click', async function () {
+        clearTimeout(minuterie);
+        bouton.disabled = true;
+        statut.textContent = '';
+        try {
+            await copierTexte(code.textContent);
+            statut.textContent = textes.copie;
+        } catch {
+            statut.textContent = textes.echec;
+        } finally {
+            bouton.disabled = false;
+            minuterie = setTimeout(function () {
+                statut.textContent = '';
+            }, 5000);
+        }
+    });
 });

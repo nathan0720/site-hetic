@@ -5,13 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Découvre CSS : le style d’une page web, avec une explication simple et un exemple.">
     <title>Comprendre CSS — Nathan &amp; Simon</title>
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
+    <link rel="stylesheet" href="style.css?v=langues-copie-1">
+    <script src="script.js?v=langues-copie-1" defer></script>
 </head>
 <body>
     <header class="entete">
         <a class="signature" href="index.html" aria-label="Accueil"><img class="logo-hetic" src="hetic-logo.svg" alt="HETIC" width="52" height="70"></a>
-        <button class="bouton-theme" type="button" aria-pressed="false" hidden>☀ Thème clair</button>
+        <div class="actions-entete">
+            <nav class="choix-langue" aria-label="Langue du site">
+                <a href="css.html" lang="fr" hreflang="fr" aria-current="page" aria-label="Français">FR</a>
+                <a href="css-en.html" lang="en" hreflang="en" aria-label="English">EN</a>
+            </nav>
+            <button class="bouton-theme" type="button" aria-pressed="false" hidden>☀ Thème clair</button>
+        </div>
     </header>
     <main class="cours">
         <a class="retour" href="index.html">← Retour à l’accueil</a>
@@ -19,11 +25,18 @@
             <p class="etiquette">Les bases du web</p>
             <h1 id="titre">C’est quoi <span>CSS</span> ?</h1>
             <p class="introduction">Le style d’une page web</p>
-            <nav class="langages" aria-label="Les cours"><a href="html.html">HTML</a><a href="css.html">CSS</a><a href="javascript.html">JavaScript</a></nav>
+            <nav class="langages" aria-label="Les cours"><a href="html.html"><span class="nom-langage">HTML</span><span class="aide-langage">La structure <span aria-hidden="true">→</span></span></a><a href="css.html"><span class="nom-langage">CSS</span><span class="aide-langage">Le style <span aria-hidden="true">→</span></span></a><a href="javascript.html"><span class="nom-langage">JavaScript</span><span class="aide-langage">Les interactions <span aria-hidden="true">→</span></span></a></nav>
         </section>
         <section class="bloc-cours"><h2>Définition</h2><p>CSS signifie Cascading Style Sheets, ou feuilles de style en cascade. Ce langage définit la présentation des éléments HTML.</p></section>
         <section class="bloc-cours"><h2>À quoi sert CSS ?</h2><p>Il permet de choisir les couleurs, les polices, les espacements et la disposition des éléments. Il permet aussi d’adapter la mise en page aux téléphones et aux ordinateurs.</p></section>
 
+
+        <section class="bloc-cours">
+            <h2>Comment appliquer ce CSS à une page HTML ?</h2>
+            <p>On écrit les règles dans <code>style.css</code>, puis on ajoute cette ligne dans le <code>&lt;head&gt;</code> de chaque page HTML :</p>
+            <pre><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;</code></pre>
+            <p>Le chemin est relatif au fichier HTML : comme nos fichiers sont dans le même dossier, le nom suffit. Une classe comme <code>class="bloc-cours"</code> dans le HTML est ciblée par <code>.bloc-cours</code> dans le CSS. Une modification du fichier partagé met à jour l’apparence de toutes les pages qui le chargent.</p>
+        </section>
         <section class="bloc-cours">
             <h2>Comment a-t-on mis cette page en forme ?</h2>
             <p>Toutes nos pages chargent le même fichier <code>style.css</code>. On garde ainsi les mêmes couleurs, le même logo et les mêmes blocs sur tout le site. Voici des extraits réellement utilisés.</p>
@@ -80,16 +93,23 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 24px;
+    gap: 12px;
+    margin-top: 20px;
 }
 
-.langages a:hover, .langages a[aria-current=&quot;page&quot;] {
-    color: var(--accent);
-    border-color: var(--accent);
-    background: var(--surface);
+.langages a {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    min-width: 150px;
+    min-height: 80px;
+    padding: 14px 20px;
+    border-radius: 16px;
+    text-align: left;
+    transition: transform 0.2s, border-color 0.2s;
 }</code></pre>
-            <p><code>justify-content: center</code> centre les liens. <code>gap</code> les espace et <code>flex-wrap: wrap</code> les autorise à passer à la ligne. <code>:hover</code> change leur apparence au survol. Le sélecteur <code>[aria-current="page"]</code> met en évidence le cours ouvert ; cet attribut est ajouté par notre JavaScript.</p>
+            <p><code>justify-content: center</code> centre les liens. <code>gap</code> les espace et <code>flex-wrap: wrap</code> les autorise à passer à la ligne. <code>min-height: 80px</code> et les espacements agrandissent la zone cliquable. Le nom du langage et sa description sont empilés avec <code>flex-direction: column</code>. <code>:hover</code> change leur apparence au survol. Le sélecteur <code>[aria-current="page"]</code> met en évidence le cours ouvert ; cet attribut est ajouté par notre JavaScript.</p>
         </section>
 
         <section class="bloc-cours">
