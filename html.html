@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Découvre HTML : la structure d’une page web, avec une explication simple et un exemple.">
+    <title>Comprendre HTML — Nathan &amp; Simon</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header class="entete">
+        <a class="signature" href="index.html" aria-label="Accueil"><img class="logo-hetic" src="hetic-logo.svg" alt="HETIC" width="52" height="70"></a>
+        <button class="bouton-theme" type="button" aria-pressed="false" hidden>☀ Thème clair</button>
+    </header>
+    <main class="cours">
+        <a class="retour" href="index.html">← Retour à l’accueil</a>
+        <section class="presentation" aria-labelledby="titre">
+            <p class="etiquette">Les bases du web</p>
+            <h1 id="titre">C’est quoi <span>HTML</span> ?</h1>
+            <p class="introduction">La structure d’une page web</p>
+            <nav class="langages" aria-label="Les cours"><a href="html.html">HTML</a><a href="css.html">CSS</a><a href="javascript.html">JavaScript</a></nav>
+        </section>
+        <section class="bloc-cours"><h2>Définition</h2><p>HTML signifie HyperText Markup Language. C’est un langage de balisage : il décrit le contenu et la structure d’une page web.</p></section>
+        <section class="bloc-cours"><h2>À quoi sert HTML ?</h2><p>Il sert à créer des titres, des paragraphes, des liens, des images ou des formulaires. Les balises indiquent au navigateur le rôle de chaque élément.</p></section>
+
+        <section class="bloc-cours">
+            <h2>Comment a-t-on construit cette page ?</h2>
+            <p>Cette page est le fichier <code>html.html</code>. Les pages <code>css.html</code> et <code>javascript.html</code> reprennent la même structure. Voici les morceaux de code réellement utilisés et leur rôle.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>1. Préparer la page et charger les fichiers</h2>
+            <p>Au début du fichier, on indique que le document est en HTML et que le texte est en français. Dans <code>&lt;head&gt;</code>, on prépare les informations de la page.</p>
+            <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;fr&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+    &lt;title&gt;Comprendre HTML — Nathan &amp;amp; Simon&lt;/title&gt;
+    &lt;link rel=&quot;stylesheet&quot; href=&quot;style.css&quot;&gt;
+    &lt;script src=&quot;script.js&quot; defer&gt;&lt;/script&gt;
+&lt;/head&gt;</code></pre>
+            <p><code>charset="UTF-8"</code> permet d’afficher les accents. La ligne <code>viewport</code> permet d’adapter l’affichage à la largeur du téléphone. <code>&lt;title&gt;</code> donne le nom de l’onglet. <code>&lt;link&gt;</code> charge notre CSS et <code>&lt;script&gt;</code> charge notre JavaScript. Avec <code>defer</code>, le script attend que le HTML soit analysé avant de s’exécuter.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>2. Afficher le logo et le bouton de thème</h2>
+            <p>L’en-tête se trouve dans <code>&lt;header&gt;</code>. Le logo est une image placée à l’intérieur d’un lien vers l’accueil.</p>
+            <pre><code>&lt;header class=&quot;entete&quot;&gt;
+    &lt;a class=&quot;signature&quot; href=&quot;index.html&quot; aria-label=&quot;Accueil&quot;&gt;
+        &lt;img class=&quot;logo-hetic&quot; src=&quot;hetic-logo.svg&quot; alt=&quot;HETIC&quot; width=&quot;52&quot; height=&quot;70&quot;&gt;
+    &lt;/a&gt;
+    &lt;button class=&quot;bouton-theme&quot; type=&quot;button&quot; aria-pressed=&quot;false&quot; hidden&gt;☀ Thème clair&lt;/button&gt;
+&lt;/header&gt;</code></pre>
+            <p><code>src</code> indique le fichier du logo et <code>alt</code> donne un texte de remplacement. Les attributs <code>class</code> permettent au CSS de cibler ces éléments. Le bouton est caché avec <code>hidden</code> au départ : notre JavaScript le rend visible lorsqu’il est prêt. <code>aria-pressed</code> indique aux outils d’accessibilité si le thème clair est activé.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>3. Passer d’une page à l’autre</h2>
+            <p>Les liens HTML assurent la navigation. Quand on clique sur CSS, le navigateur ouvre le fichier <code>css.html</code>.</p>
+            <pre><code>&lt;nav class=&quot;langages&quot; aria-label=&quot;Les cours&quot;&gt;
+    &lt;a href=&quot;html.html&quot;&gt;HTML&lt;/a&gt;
+    &lt;a href=&quot;css.html&quot;&gt;CSS&lt;/a&gt;
+    &lt;a href=&quot;javascript.html&quot;&gt;JavaScript&lt;/a&gt;
+&lt;/nav&gt;</code></pre>
+            <p><code>&lt;nav&gt;</code> regroupe les liens de navigation. Chaque attribut <code>href</code> donne le nom du fichier à ouvrir, situé dans le même dossier. Ces liens fonctionnent même sans JavaScript.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>4. Organiser les explications</h2>
+            <p>Le contenu principal est placé dans <code>&lt;main class="cours"&gt;</code>. Le titre principal utilise <code>&lt;h1&gt;</code>, puis chaque bloc d’explication possède un titre <code>&lt;h2&gt;</code>.</p>
+            <pre><code>&lt;section class=&quot;bloc-cours&quot;&gt;
+    &lt;h2&gt;Définition&lt;/h2&gt;
+    &lt;p&gt;HTML signifie HyperText Markup Language. C’est un langage de balisage : il décrit le contenu et la structure d’une page web.&lt;/p&gt;
+&lt;/section&gt;</code></pre>
+            <p>La classe <code>bloc-cours</code> donne à chaque section son cadre et ses espacements grâce au CSS. Les extraits de code sont affichés dans <code>&lt;pre&gt;&lt;code&gt;</code> pour conserver les retours à la ligne. Pour montrer une balise sans que le navigateur l’interprète, on écrit par exemple <code>&amp;lt;h1&amp;gt;</code> dans le fichier HTML. Enfin, <code>&lt;footer&gt;</code> contient la signature en bas de la page.</p>
+        </section>
+        <section class="bloc-cours"><h2>Les trois travaillent ensemble</h2><p>HTML définit le contenu, CSS s’occupe de son apparence et JavaScript ajoute des interactions.</p></section>
+    </main>
+    <footer><p>Imaginé et codé par <strong>Nathan &amp; Simon</strong></p><p>Premiers pas, grandes idées.</p></footer>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Découvre CSS : le style d’une page web, avec une explication simple et un exemple.">
+    <title>Comprendre CSS — Nathan &amp; Simon</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header class="entete">
+        <a class="signature" href="index.html" aria-label="Accueil"><img class="logo-hetic" src="hetic-logo.svg" alt="HETIC" width="52" height="70"></a>
+        <button class="bouton-theme" type="button" aria-pressed="false" hidden>☀ Thème clair</button>
+    </header>
+    <main class="cours">
+        <a class="retour" href="index.html">← Retour à l’accueil</a>
+        <section class="presentation" aria-labelledby="titre">
+            <p class="etiquette">Les bases du web</p>
+            <h1 id="titre">C’est quoi <span>CSS</span> ?</h1>
+            <p class="introduction">Le style d’une page web</p>
+            <nav class="langages" aria-label="Les cours"><a href="html.html">HTML</a><a href="css.html">CSS</a><a href="javascript.html">JavaScript</a></nav>
+        </section>
+        <section class="bloc-cours"><h2>Définition</h2><p>CSS signifie Cascading Style Sheets, ou feuilles de style en cascade. Ce langage définit la présentation des éléments HTML.</p></section>
+        <section class="bloc-cours"><h2>À quoi sert CSS ?</h2><p>Il permet de choisir les couleurs, les polices, les espacements et la disposition des éléments. Il permet aussi d’adapter la mise en page aux téléphones et aux ordinateurs.</p></section>
+
+        <section class="bloc-cours">
+            <h2>Comment a-t-on mis cette page en forme ?</h2>
+            <p>Toutes nos pages chargent le même fichier <code>style.css</code>. On garde ainsi les mêmes couleurs, le même logo et les mêmes blocs sur tout le site. Voici des extraits réellement utilisés.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>1. Choisir les couleurs</h2>
+            <p>Dans <code>:root</code>, on définit des variables de couleur réutilisables. Par exemple, <code>--texte</code> est la couleur principale du texte.</p>
+            <pre><code>:root {
+    color-scheme: dark;
+    --fond: #101827;
+    --fond-secondaire: #29215b;
+    --texte: #f5f5ff;
+    --texte-discret: #b7bed4;
+    --accent: #80e8ee;
+    --bordure: #ffffff24;
+    --surface: #ffffff08;
+}</code></pre>
+            <p>On utilise ensuite <code>var(--texte)</code> ou <code>var(--accent)</code> dans les règles CSS. Le fond du <code>body</code> est un dégradé entre <code>--fond</code> et <code>--fond-secondaire</code>. La règle <code>body.theme-clair</code> remplace ces variables quand JavaScript active le thème clair.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>2. Centrer le contenu et limiter sa largeur</h2>
+            <p>Ces règles laissent de l’espace sur les côtés et évitent que les explications prennent toute la largeur de l’écran.</p>
+            <pre><code>.entete, main, footer {
+    width: min(1080px, calc(100% - 48px));
+    margin-inline: auto;
+}
+
+.cours {
+    max-width: 760px;
+    padding-block: 28px 60px;
+}</code></pre>
+            <p><code>min()</code> choisit la plus petite des deux largeurs. <code>calc(100% - 48px)</code> réserve 24 pixels de chaque côté. <code>margin-inline: auto</code> centre le contenu. Sur les pages de cours, <code>max-width</code> limite la largeur à 760 pixels et <code>padding-block</code> ajoute de l’espace en haut et en bas.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>3. Créer les blocs d’explication</h2>
+            <p>Chaque section de cette page porte la classe <code>bloc-cours</code>. Le point devant <code>.bloc-cours</code> indique que le sélecteur cible une classe.</p>
+            <pre><code>.bloc-cours {
+    padding: 24px;
+    margin-bottom: 20px;
+    border: 1px solid var(--bordure);
+    border-radius: 18px;
+    background: var(--surface);
+}</code></pre>
+            <p><code>padding</code> crée de l’espace à l’intérieur du bloc. <code>margin-bottom</code> sépare les blocs entre eux. <code>border</code> dessine le contour, <code>border-radius</code> arrondit les coins et <code>background</code> ajoute un fond légèrement transparent.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>4. Aligner les liens et montrer la page ouverte</h2>
+            <p>On utilise Flexbox pour placer les liens HTML, CSS et JavaScript côte à côte.</p>
+            <pre><code>.langages {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 24px;
+}
+
+.langages a:hover, .langages a[aria-current=&quot;page&quot;] {
+    color: var(--accent);
+    border-color: var(--accent);
+    background: var(--surface);
+}</code></pre>
+            <p><code>justify-content: center</code> centre les liens. <code>gap</code> les espace et <code>flex-wrap: wrap</code> les autorise à passer à la ligne. <code>:hover</code> change leur apparence au survol. Le sélecteur <code>[aria-current="page"]</code> met en évidence le cours ouvert ; cet attribut est ajouté par notre JavaScript.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>5. Afficher le code et adapter la page aux écrans</h2>
+            <p>Les exemples de code gardent leurs retours à la ligne grâce à la balise HTML <code>&lt;pre&gt;</code>. Le CSS leur ajoute un cadre et permet de défiler horizontalement si une ligne est trop longue.</p>
+            <pre><code>pre {
+    overflow-x: auto;
+    padding: 18px;
+    border-radius: 10px;
+    background: var(--fond);
+    border: 1px solid var(--bordure);
+}
+
+.cours h1 {
+    font-size: clamp(38px, 7vw, 64px);
+}</code></pre>
+            <p><code>clamp()</code> adapte le titre à la largeur de l’écran tout en gardant une taille entre 38 et 64 pixels. Nos règles <code>@media</code> réduisent aussi certains espacements sur les petits écrans. Le logo utilise <code>object-fit: contain</code> pour garder ses proportions ; en thème sombre, <code>filter: invert(1)</code> rend le logo noir visible en blanc.</p>
+        </section>
+        <section class="bloc-cours"><h2>Les trois travaillent ensemble</h2><p>HTML définit le contenu, CSS s’occupe de son apparence et JavaScript ajoute des interactions.</p></section>
+    </main>
+    <footer><p>Imaginé et codé par <strong>Nathan &amp; Simon</strong></p><p>Premiers pas, grandes idées.</p></footer>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Découvre JavaScript : les interactions d’une page web, avec une explication simple et un exemple.">
+    <title>Comprendre JavaScript — Nathan &amp; Simon</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <header class="entete">
+        <a class="signature" href="index.html" aria-label="Accueil"><img class="logo-hetic" src="hetic-logo.svg" alt="HETIC" width="52" height="70"></a>
+        <button class="bouton-theme" type="button" aria-pressed="false" hidden>☀ Thème clair</button>
+    </header>
+    <main class="cours">
+        <a class="retour" href="index.html">← Retour à l’accueil</a>
+        <section class="presentation" aria-labelledby="titre">
+            <p class="etiquette">Les bases du web</p>
+            <h1 id="titre">C’est quoi <span>JavaScript</span> ?</h1>
+            <p class="introduction">Les interactions d’une page web</p>
+            <nav class="langages" aria-label="Les cours"><a href="html.html">HTML</a><a href="css.html">CSS</a><a href="javascript.html">JavaScript</a></nav>
+        </section>
+        <section class="bloc-cours"><h2>Définition</h2><p>JavaScript est un langage de programmation. Dans le navigateur, il permet de faire réagir une page aux actions des utilisateurs et de modifier son contenu.</p></section>
+        <section class="bloc-cours"><h2>À quoi sert JavaScript ?</h2><p>Il permet par exemple d’ouvrir un menu, de vérifier un formulaire ou de changer un thème. Sur notre site, le bouton de thème fonctionne grâce au fichier script.js.</p></section>
+
+        <section class="bloc-cours">
+            <h2>Comment fonctionne le JavaScript de cette page ?</h2>
+            <p>Toutes les pages chargent <code>script.js</code> avec <code>defer</code>. Ce fichier gère le thème, la petite démonstration et la mise en évidence du cours ouvert. Les extraits ci-dessous viennent de notre script.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>1. Récupérer le bouton et appliquer un thème</h2>
+            <p>On commence par récupérer le bouton de thème dans le HTML. Une fonction regroupe ensuite les instructions à exécuter pour changer son état.</p>
+            <pre><code>const boutonTheme = document.querySelector(&#x27;.bouton-theme&#x27;);
+
+function appliquerTheme(clair) {
+    document.body.classList.toggle(&#x27;theme-clair&#x27;, clair);
+    boutonTheme.textContent = clair ? &#x27;☾ Thème sombre&#x27; : &#x27;☀ Thème clair&#x27;;
+    boutonTheme.setAttribute(&#x27;aria-pressed&#x27;, String(clair));
+}</code></pre>
+            <p><code>const</code> déclare une variable qu’on ne réaffecte pas. <code>querySelector</code> trouve le bouton grâce à sa classe. Le paramètre <code>clair</code> vaut <code>true</code> ou <code>false</code>. <code>classList.toggle</code> ajoute ou retire <code>theme-clair</code> sur le <code>body</code> : le CSS applique alors les bonnes couleurs. L’expression <code>clair ? ... : ...</code> choisit le texte du bouton. <code>String(clair)</code> transforme le booléen en texte pour l’attribut d’accessibilité.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>2. Retrouver le thème choisi</h2>
+            <p>Au chargement de la page, on essaie de lire le thème enregistré dans le navigateur.</p>
+            <pre><code>try {
+    appliquerTheme(localStorage.getItem(&#x27;nathan-simon-theme&#x27;) === &#x27;clair&#x27;);
+} catch {
+    appliquerTheme(false);
+}
+boutonTheme.hidden = false;</code></pre>
+            <p><code>localStorage</code> mémorise une valeur dans le navigateur. <code>getItem</code> relit cette valeur et <code>===</code> vérifie si elle vaut <code>clair</code>. Si l’accès au stockage échoue, <code>catch</code> active le thème sombre. Enfin, <code>hidden = false</code> affiche le bouton.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>3. Réagir au clic sur le thème</h2>
+            <p>Un écouteur d’événement attend que l’utilisateur clique sur le bouton.</p>
+            <pre><code>boutonTheme.addEventListener(&#x27;click&#x27;, function () {
+    const clair = !document.body.classList.contains(&#x27;theme-clair&#x27;);
+    appliquerTheme(clair);
+    try {
+        localStorage.setItem(&#x27;nathan-simon-theme&#x27;, clair ? &#x27;clair&#x27; : &#x27;sombre&#x27;);
+    } catch {
+        // Le bouton reste utilisable si le stockage est désactivé.
+    }
+});</code></pre>
+            <p><code>contains</code> vérifie si la classe est présente. Le signe <code>!</code> inverse la réponse : si le thème clair est actif, on passe au sombre, et inversement. On applique ce nouveau thème puis <code>setItem</code> enregistre le choix pour les prochaines pages ou visites, si le navigateur l’autorise.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>4. Faire fonctionner le bouton de démonstration</h2>
+            <p>Plus bas dans cette page, le bouton « Clique ici » modifie le texte du paragraphe qui le suit.</p>
+            <pre><code>const boutonDemo = document.querySelector(&#x27;#bouton-demo&#x27;);
+const messageDemo = document.querySelector(&#x27;#message-demo&#x27;);
+if (boutonDemo &amp;&amp; messageDemo) {
+    boutonDemo.addEventListener(&#x27;click&#x27;, function () {
+        messageDemo.textContent = &#x27;Bravo ! JavaScript a modifié le texte de la page.&#x27;;
+    });
+}</code></pre>
+            <p>Le symbole <code>#</code> cible un identifiant HTML. La condition <code>if (boutonDemo &amp;&amp; messageDemo)</code> vérifie que les deux éléments existent. Cela évite une erreur sur les autres pages, qui chargent le même script sans avoir cette démonstration. Au clic, <code>textContent</code> remplace le texte du paragraphe. Son attribut HTML <code>aria-live="polite"</code> permet aux lecteurs d’écran d’annoncer la modification.</p>
+        </section>
+
+        <section class="bloc-cours">
+            <h2>5. Mettre en évidence le cours ouvert</h2>
+            <p>Le script compare le nom du fichier ouvert avec la destination de chaque lien de cours.</p>
+            <pre><code>const pageActuelle = window.location.pathname.split(&#x27;/&#x27;).pop();
+document.querySelectorAll(&#x27;.langages a&#x27;).forEach(function (lien) {
+    if (lien.getAttribute(&#x27;href&#x27;) === pageActuelle) {
+        lien.setAttribute(&#x27;aria-current&#x27;, &#x27;page&#x27;);
+    }
+});</code></pre>
+            <p><code>window.location.pathname</code> donne le chemin de la page. <code>split</code> le découpe aux barres obliques et <code>pop</code> récupère le dernier morceau, par exemple <code>javascript.html</code>. <code>querySelectorAll</code> récupère tous les liens de cours et <code>forEach</code> les parcourt. Si un lien correspond à la page ouverte, on lui ajoute <code>aria-current="page"</code>. Le CSS utilise cet attribut pour le colorer. Le changement de page lui-même est assuré par les liens HTML.</p>
+        </section>
+        <section class="bloc-cours" aria-labelledby="titre-demo"><h2 id="titre-demo">À toi d’essayer</h2><button id="bouton-demo" class="bouton-demo" type="button">Clique ici</button><p id="message-demo" aria-live="polite">Ce texte va changer quand tu cliqueras.</p></section>
+        <section class="bloc-cours"><h2>Les trois travaillent ensemble</h2><p>HTML définit le contenu, CSS s’occupe de son apparence et JavaScript ajoute des interactions.</p></section>
+    </main>
+    <footer><p>Imaginé et codé par <strong>Nathan &amp; Simon</strong></p><p>Premiers pas, grandes idées.</p></footer>
+</body>
+</html>
