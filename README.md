@@ -8,10 +8,21 @@ Site réalisé en HTML, CSS et JavaScript : présentation, liens vers nos résea
 - Copie des extraits de code dans le presse-papiers.
 - Cours HTML, CSS et JavaScript avec explications de leur intégration.
 - Palette HETIC, effet de verre et thèmes clair/sombre.
+- Labo : blocs à assembler pour débuter, quiz, six mini-exercices, éditeur HTML/CSS/JS et aperçu en direct.
+- Accompagnateur flottant sur toutes les pages : fenêtre déplaçable, discussion conservée pendant la navigation, dictée et lecture vocale facultatives.
+- Connexion IA avec recherche web préparée : voir README-IA.md ; elle nécessite un serveur et une clé API côté serveur.
+- Sauvegarde des essais dans le navigateur et téléchargement des projets en ZIP ou par fichier.
+- Chat minimaliste : Entrée pour envoyer, Maj + Entrée pour sauter une ligne.
+- Pièces jointes : code, texte, PDF et images (3 fichiers, 2 Mo chacun, 4 Mo au total).
+- Téléchargements des fichiers de code/texte contenus dans les réponses, individuellement ou en ZIP.
+- Guide GitHub Pages décrivant notre publication dans Safari.
+- Maquette Figma : https://www.figma.com/design/VvBDxtK290dcxWSIiXkkG3
 
 ## Ouvrir le site
 
 Ouvrir `index.html` dans un navigateur. Tous les styles, scripts et logos sont inclus dans le dépôt.
+
+Par défaut, le coach utilise des réponses guidées liées aux cours et exercices. Le mode IA reste inactif tant que coach-config.js ne désigne pas un serveur configuré. Le microphone ne démarre que sur un clic ; la dictée dépend du navigateur et peut utiliser son service vocal.
 
 ## Publication sur GitHub Pages
 
@@ -24,6 +35,9 @@ Le fichier `.nojekyll` permet de publier directement les fichiers statiques.
 - `index.html` : accueil et réseaux sociaux.
 - `html.html`, `css.html`, `javascript.html` : explications et extraits du code du site.
 - `index-en.html`, `html-en.html`, `css-en.html`, `javascript-en.html` : versions anglaises.
+- `entrainement.html`, `entrainement-en.html`, `entrainement.js` : quiz, éditeur, aperçu, coach et exports.
+- `github-pages.html`, `github-pages-en.html` : guide de publication.
+- `projet-hetic.zip` : copie téléchargeable du site complet (sans archive imbriquée).
 - `style.css` : mise en page et thèmes.
 - `script.js` : changement de thème et démonstration interactive.
 

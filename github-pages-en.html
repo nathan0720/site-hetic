@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Publish with GitHub Pages — Nathan et Simon, HETIC.">
+<title>Publish with GitHub Pages — Nathan &amp; Simon</title>
+<link rel="stylesheet" href="style.css?v=accompagnateur-3">
+<script src="script.js?v=accompagnateur-3" defer></script>
+
+<script src="coach-config.js?v=accompagnateur-3" defer></script>
+<script src="coach.js?v=accompagnateur-3" defer></script>
+<script src="coach-pieces-jointes.js?v=accompagnateur-3" defer></script>
+<script src="coach-fichiers.js?v=accompagnateur-3" defer></script>
+<script src="coach-ia.js?v=accompagnateur-3" defer></script>
+</head>
+<body>
+<header class="entete">
+<a class="signature" href="index-en.html" aria-label="Home"><img class="logo-hetic" src="hetic-logo.svg" alt="HETIC" width="52" height="70"></a>
+<div class="actions-entete">
+<a class="lien-entrainement" href="entrainement-en.html">Practise <span aria-hidden="true">↗</span></a>
+<nav class="choix-langue" aria-label="Site language"><a href="github-pages.html" lang="fr" hreflang="fr" aria-label="Français">FR</a><a href="github-pages-en.html" lang="en" hreflang="en" aria-current="page" aria-label="English">EN</a></nav>
+<button class="bouton-theme" type="button" aria-pressed="false" hidden>☀ Light theme</button>
+</div>
+</header>
+<main class="cours guide-publication"><section class="presentation" aria-labelledby="titre"><p class="etiquette">From a folder to a live site</p><h1 id="titre">How we<br><span>published it.</span></h1><p class="introduction">The steps we actually followed on GitHub, in Safari.</p></section><section class="bloc-cours"><h2>Our website and repository</h2><p><a href="https://nathan0720.github.io/site-hetic/">Open the live website ↗</a></p><p><a href="https://github.com/nathan0720/site-hetic">View the files on GitHub ↗</a></p></section><section class="bloc-cours"><h2>1. Create the repository</h2><p>In Safari, we signed in to GitHub and opened <strong>New repository</strong>. We named it <code>site-hetic</code>, chose <strong>Public</strong> and clicked <strong>Create repository</strong>.</p></section><section class="bloc-cours"><h2>2. Upload the files to the root</h2><p>In the new repository, we clicked <strong>uploading an existing file</strong>, then <strong>Choose your files</strong>. We selected the pages, CSS, JavaScript and logos. <code>index.html</code> must be directly in the repository root, not inside another folder.</p></section><section class="bloc-cours"><h2>3. Save with a commit</h2><p>We entered a summary and clicked <strong>Commit changes</strong>. The files were saved in the history of the <code>main</code> branch. A commit is a version of the project that GitHub keeps.</p></section><section class="bloc-cours"><h2>4. Enable GitHub Pages</h2><p>In the repository, we opened <strong>Settings → Pages</strong>. Under <strong>Build and deployment</strong>, we chose <strong>Deploy from a branch</strong>, the <code>main</code> branch and the <code>/ (root)</code> folder, then clicked <strong>Save</strong>.</p></section><section class="bloc-cours"><h2>5. Wait for deployment</h2><p>The <strong>Actions</strong> tab shows the <code>pages build and deployment</code> workflow. We waited for its green <strong>Success</strong> status and opened the site link. The first deployment can take a few minutes.</p></section><section class="bloc-cours"><h2>6. Update the site</h2><p>For later improvements, we used <strong>Add file → Upload files</strong>, replaced the changed files and saved another commit on <code>main</code>. GitHub Pages republishes the site automatically. We then checked the result in Safari.</p></section><section class="bloc-cours"><h2>Keep the files together</h2><pre><code>site-hetic/
+├── index.html
+├── style.css
+├── script.js
+├── html.html
+├── css.html
+├── javascript.html
+├── entrainement.html
+├── entrainement.js
+└── … logos et versions anglaises / logos and English versions</code></pre><p>Links use relative paths such as <code>style.css</code> and <code>html.html</code>. They work both in the local folder and under <code>/site-hetic/</code>.</p></section><section class="bloc-cours"><h2>Publish what you built in the lab</h2><p>Click “My project as a ZIP” in the practice lab, unzip it and upload the files to your own repository. It contains an <code>index.html</code> linked to <code>style.css</code> and <code>script.js</code>. Then follow the Pages steps above.</p><a href="entrainement-en.html">Open the lab →</a></section><section class="bloc-cours"><h2>If the site does not appear</h2><ul><li>Check that the file is named <code>index.html</code>, all lowercase.</li><li>Check <code>main</code> and <code>/ (root)</code> in Settings → Pages.</li><li>Read the result of the latest deployment in Actions.</li><li>In Safari, use ⌘⌥R to reload from the origin if an old version is still displayed.</li></ul><p><a href="https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site">Read the GitHub Pages documentation ↗</a></p></section></main>
+<footer><p>Designed and coded by <strong>Nathan &amp; Simon</strong></p><nav class="liens-footer" aria-label="Useful links"><a href="entrainement-en.html">Practise</a><a href="github-pages-en.html">Publish with GitHub Pages</a><a href="projet-hetic.zip" download>Download the whole site ↓</a></nav></footer>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="S’entraîner au web — Nathan et Simon, HETIC.">
+<title>S’entraîner au web — Nathan &amp; Simon</title>
+<link rel="stylesheet" href="style.css?v=accompagnateur-3">
+<script src="script.js?v=accompagnateur-3" defer></script>
+<script src="entrainement.js?v=accompagnateur-3" defer></script>
+<script src="blocs.js?v=accompagnateur-3" defer></script>
+<script src="coach-config.js?v=accompagnateur-3" defer></script>
+<script src="coach.js?v=accompagnateur-3" defer></script>
+<script src="coach-pieces-jointes.js?v=accompagnateur-3" defer></script>
+<script src="coach-fichiers.js?v=accompagnateur-3" defer></script>
+<script src="coach-ia.js?v=accompagnateur-3" defer></script>
+</head>
+<body>
+<header class="entete">
+<a class="signature" href="index.html" aria-label="Accueil"><img class="logo-hetic" src="hetic-logo.svg" alt="HETIC" width="52" height="70"></a>
+<div class="actions-entete">
+<a class="lien-entrainement" href="entrainement.html" aria-current="page">S’entraîner <span aria-hidden="true">↗</span></a>
+<nav class="choix-langue" aria-label="Langue du site"><a href="entrainement.html" lang="fr" hreflang="fr" aria-current="page" aria-label="Français">FR</a><a href="entrainement-en.html" lang="en" hreflang="en" aria-label="English">EN</a></nav>
+<button class="bouton-theme" type="button" aria-pressed="false" hidden>☀ Thème clair</button>
+</div>
+</header>
+<main class="atelier" id="atelier">
+<section class="presentation presentation-atelier" aria-labelledby="titre">
+<p class="etiquette">Le labo HETIC</p>
+<h1 id="titre">Comprendre. Coder.<br><span>À toi de jouer.</span></h1>
+<p class="introduction">Vérifie tes notions, construis tes premiers exemples et progresse avec ton coach.</p>
+<nav class="etapes-atelier" aria-label="Les étapes"><a href="#quiz">01 · Le quiz</a><a href="#pratique">02 · À toi de coder</a><a href="#coach">03 · Ton coach</a></nav>
+</section>
+<div class="bilan-atelier"><div><span>Notions comprises</span><strong id="score-quiz">— / 6</strong></div><div><span>Exercices réussis</span><strong id="score-code">0 / 6</strong></div><div><span>Ton rythme</span><strong>Pas à pas</strong></div></div>
+<noscript><p class="bloc-cours">Active JavaScript pour utiliser le quiz, l’éditeur et le coach. Les cours restent accessibles depuis l’accueil. <a href="index.html">Retour à l’accueil</a></p></noscript>
+<section class="bloc-cours quiz-section" id="quiz" aria-labelledby="titre-quiz">
+<div class="section-atelier"><div><p class="etiquette">01 · Les notions</p><h2 id="titre-quiz">Tu as bien compris ?</h2></div><span id="quiz-compteur">1 / 6</span></div>
+<progress id="quiz-progres" max="6" value="0" aria-label="Progression du quiz"></progress>
+<form id="form-quiz"><fieldset id="question-quiz"><legend id="quiz-question">Chargement du quiz…</legend><div id="quiz-options"></div></fieldset><div class="retour-quiz" id="quiz-retour" role="status"></div><div class="rangee-actions"><button class="bouton-primaire" type="submit" id="valider-quiz">Valider ma réponse</button><button class="bouton-secondaire" type="button" id="suite-quiz" hidden>Question suivante →</button><button class="bouton-secondaire" type="button" id="recommencer-quiz" hidden>Recommencer le quiz</button><a href="#pratique">Passer au code ↓</a></div></form>
+</section>
+<section id="pratique" aria-labelledby="titre-pratique">
+<div class="section-atelier"><div><p class="etiquette">02 · Les mini-exercices</p><h2 id="titre-pratique">Ton éditeur. Ton aperçu.</h2></div><p class="texte-discret">Tes essais restent dans ton navigateur.</p></div>
+<nav id="liste-exercices" class="liste-exercices" aria-label="Choisir un exercice"></nav>
+<div class="grille-atelier">
+<div class="zone-travail">
+<section class="bloc-cours consigne"><div class="section-atelier"><span class="etiquette" id="langage-exercice">HTML</span><span id="etat-exercice" class="texte-discret"></span></div><h3 id="titre-exercice"></h3><p id="consigne-exercice"></p><ul id="objectifs-exercice" class="objectifs-exercice"></ul><a id="lien-cours" href="html.html">Revoir le cours ↗</a></section>
+<div class="editeur-apercu">
+<section class="panneau-code" aria-label="Éditeur de code"><div class="onglets-code" role="tablist" aria-label="Les fichiers du projet"><button role="tab" type="button" id="onglet-html" aria-controls="panneau-html" aria-selected="true" tabindex="0">HTML</button><button role="tab" type="button" id="onglet-css" aria-controls="panneau-css" aria-selected="false" tabindex="-1">CSS</button><button role="tab" type="button" id="onglet-js" aria-controls="panneau-js" aria-selected="false" tabindex="-1">JavaScript</button></div>
+<div role="tabpanel" id="panneau-html" aria-labelledby="onglet-html"><label class="etiquette-editeur" for="code-html">Ton code HTML</label><textarea id="code-html" spellcheck="false" autocapitalize="off" autocorrect="off" wrap="off" maxlength="20000" aria-label="Éditeur HTML"></textarea></div><div role="tabpanel" id="panneau-css" aria-labelledby="onglet-css" hidden><label class="etiquette-editeur" for="code-css">Ton code CSS</label><textarea id="code-css" spellcheck="false" autocapitalize="off" autocorrect="off" wrap="off" maxlength="20000" aria-label="Éditeur CSS"></textarea></div><div role="tabpanel" id="panneau-js" aria-labelledby="onglet-js" hidden><label class="etiquette-editeur" for="code-js">Ton code JavaScript</label><textarea id="code-js" spellcheck="false" autocapitalize="off" autocorrect="off" wrap="off" maxlength="20000" aria-label="Éditeur JavaScript"></textarea></div>
+<p class="note-editeur">HTML = contenu du &lt;body&gt;. CSS et JavaScript = fichiers séparés.</p></section>
+<section class="panneau-apercu" aria-labelledby="titre-apercu"><div class="entete-apercu"><h3 id="titre-apercu">Aperçu en direct</h3><label class="option-auto"><input type="checkbox" id="apercu-auto" checked> Auto</label></div><iframe id="apercu-code" title="Résultat de ton code" sandbox="allow-scripts" referrerpolicy="no-referrer"></iframe><p id="etat-apercu" class="note-editeur" role="status"></p></section>
+</div>
+<div class="rangee-actions commandes-code"><button class="bouton-primaire" type="button" id="verifier-code">Vérifier mon code ✓</button><button class="bouton-secondaire" type="button" id="actualiser-code">Actualiser l’aperçu</button><button class="bouton-discret" type="button" id="reset-code">Repartir du début</button></div>
+<p id="resultat-code" class="resultat-code" role="status"></p>
+<section class="bloc-cours telechargements" aria-labelledby="titre-telecharger"><h3 id="titre-telecharger">Garde ce que tu as créé.</h3><p>Télécharge ton essai et ouvre index.html sur ton ordinateur.</p><div class="rangee-actions"><button class="bouton-primaire" type="button" id="telecharger-projet">Mon projet en ZIP ↓</button><button class="bouton-secondaire" type="button" data-export="html">HTML ↓</button><button class="bouton-secondaire" type="button" data-export="css">CSS ↓</button><button class="bouton-secondaire" type="button" data-export="js">JavaScript ↓</button></div><p id="etat-export" role="status" class="texte-discret"></p><a href="github-pages.html">Comment mettre mon projet sur GitHub Pages ? ↗</a></section>
+</div>
+<aside class="bloc-cours panneau-coach" id="coach" aria-labelledby="titre-coach"><div class="identite-coach"><svg viewBox="0 0 48 48" width="48" height="48" aria-hidden="true"><path d="M24 5v7" stroke="currentColor" stroke-width="3"/><circle cx="24" cy="5" r="3" fill="currentColor"/><rect x="5" y="12" width="38" height="30" rx="11" fill="currentColor"/><circle cx="17" cy="25" r="3" fill="#001810"/><circle cx="31" cy="25" r="3" fill="#001810"/><path d="M17 33q7 5 14 0" fill="none" stroke="#001810" stroke-width="2.5" stroke-linecap="round"/></svg><div><h2 id="titre-coach">Ton petit coach</h2><p>Des indices, pas à pas.</p></div></div>
+<p class="note-coach" data-guided-note>Coach guidé pour ces exercices : pose tes questions sur HTML, CSS et JavaScript.</p>
+<div id="observation-coach" class="observation-coach" role="status"></div>
+<div class="rangee-actions aides-coach"><button class="bouton-secondaire" id="indice-coach" type="button">Un indice 💡</button><button class="bouton-secondaire" id="expliquer-coach" type="button">Explique-moi</button></div>
+<div class="messages-coach" id="messages-coach" role="log" aria-live="polite" aria-label="Discussion avec le coach"></div>
+<form id="form-coach"><label for="question-coach">Ta question</label><textarea id="question-coach" rows="2" maxlength="300" placeholder="Je bloque sur…"></textarea><div class="rangee-actions"><button type="submit" class="bouton-primaire">Envoyer</button><button id="dicter-coach" type="button" class="bouton-secondaire" aria-pressed="false">🎙 Dicter</button></div></form>
+<p id="etat-micro" class="note-coach" role="status">Le micro s’active uniquement à ton clic. Relis ta dictée avant de l’envoyer.</p>
+<p class="note-coach">La dictée dépend de ton navigateur ; l’audio peut être traité par son service vocal.</p>
+<div class="options-voix"><label><input id="lire-coach" type="checkbox"> Écouter les réponses</label><button type="button" id="arreter-voix" class="bouton-discret" disabled>Arrêter la voix</button></div>
+</aside>
+</div>
+</section>
+</main>
+<footer><p>Imaginé et codé par <strong>Nathan &amp; Simon</strong></p><nav class="liens-footer" aria-label="Liens utiles"><a href="entrainement.html">S’entraîner</a><a href="github-pages.html">Publier avec GitHub Pages</a><a href="projet-hetic.zip" download>Télécharger tout le site ↓</a></nav></footer>
+</body>
+</html>
